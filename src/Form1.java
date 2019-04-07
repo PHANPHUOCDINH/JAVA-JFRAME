@@ -43,6 +43,7 @@ public class Form1 extends JFrame {
 	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode;
 	private JTextField textSo,textRandom;
 	private JTextArea textArea,textArea_1;
+	private int[]arr;
 	/**
 	 * Launch the application.
 	 */
@@ -88,20 +89,11 @@ public class Form1 extends JFrame {
 		
 		radioButtonNhap = new JRadioButton("Nhập");
 		radioButtonNhap.setBounds(33, 26, 63, 23);
-		radioButtonNhap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.print("OK");
-			}
-		});
 		radioButtonNhap.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(radioButtonNhap);
 		
 		radioButtonRandom = new JRadioButton("Random");
 		radioButtonRandom.setBounds(33, 124, 87, 23);
-		radioButtonRandom.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		radioButtonRandom.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(radioButtonRandom);
 		
@@ -219,6 +211,19 @@ public class Form1 extends JFrame {
 		contentPane.add(labelCode);
 		
 		buttonTaoNut = new JButton("Tạo Nút");
+		buttonTaoNut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!radioButtonNhap.isSelected()&&!radioButtonRandom.isSelected())
+				{
+					JOptionPane.showMessageDialog(rootPane, "Chọn đầu vào hợp lệ", "Warning",JOptionPane.WARNING_MESSAGE);
+				}
+				else
+				{
+					if(radioButtonNhap.isSelected())
+						xuLyChuoi(textSo);
+				}
+			}
+		});
 		buttonTaoNut.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		buttonTaoNut.setBounds(27, 204, 116, 23);
 		contentPane.add(buttonTaoNut);
@@ -242,6 +247,10 @@ public class Form1 extends JFrame {
 		textArea_1.setBounds(431, 198, 434, 102);
 		contentPane.add(textArea_1);
 		
+		
+	}
+	public static void xuLyChuoi(String s)
+	{
 		
 	}
 }
