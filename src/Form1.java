@@ -43,7 +43,7 @@ public class Form1 extends JFrame {
 	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode;
 	private JTextField textSo,textRandom;
 	private JTextArea textArea,textArea_1;
-	private int[]arr;
+	private int arr[],len,pos[];
 	/**
 	 * Launch the application.
 	 */
@@ -220,7 +220,7 @@ public class Form1 extends JFrame {
 				else
 				{
 					if(radioButtonNhap.isSelected())
-						xuLyChuoi(textSo);
+						xuLyChuoi(textSo.getText());
 				}
 			}
 		});
@@ -249,8 +249,15 @@ public class Form1 extends JFrame {
 		
 		
 	}
-	public static void xuLyChuoi(String s)
+	public void xuLyChuoi(String s)
 	{
-		
+		while(s.contains("  "))
+			s=s.replace("  ", " ");
+		String[]cat =s.split(" ");
+		len=cat.length;
+		arr=new int[len];
+		pos=new int[len];
+		//if(len<=1)
+			
 	}
 }
