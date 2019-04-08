@@ -24,6 +24,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JToolBar;
+import javax.swing.Timer;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Font;
@@ -38,12 +39,14 @@ public class Form1 extends JFrame {
 	private JMenu menuCaiDat,menuGioiThieu,menuChonMau;
 	private JRadioButton radioButtonNhap,radioButtonRandom,radioButton,radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7;
 	private ButtonGroup buttonGroup1,buttonGroup2;
-	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStop;
+	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStop,listbut[];
 	private JComboBox comboBoxFile,comboBoxRandom;
-	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode;
+	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[];
 	private JTextField textSo,textRandom;
 	private JTextArea textArea,textArea_1;
 	private int arr[],len,pos[];
+	private Timer timer;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -251,13 +254,34 @@ public class Form1 extends JFrame {
 	}
 	public void xuLyChuoi(String s)
 	{
+		try {
 		while(s.contains("  "))
 			s=s.replace("  ", " ");
 		String[]cat =s.split(" ");
 		len=cat.length;
-		arr=new int[len];
-		pos=new int[len];
-		//if(len<=1)
-			
+		if(len<=1)
+			JOptionPane.showMessageDialog(rootPane, "Nhập 2 số trở lên", "Warning", JOptionPane.WARNING_MESSAGE);
+		else
+		{
+			if(len>9)
+				JOptionPane.showMessageDialog(rootPane, "Nhập 9 số trở xuống", "Warning", JOptionPane.WARNING_MESSAGE);
+			else
+			{
+				arr=new int[len];
+				pos=new int[len];
+				labelindex=new JLabel[len];
+				listbut= new JButton[len];
+				for(int i=0;i<len;i++)
+				{
+					arr[i]=	Integer.parseInt(cat[i]);
+					labelindex[i]= new JLabel(String.valueOf(i));
+					listbut[i]=new JButton(String.valueOf(arr[i]));
+				}
+			}
+		}
+		}catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(rootPane, "Kiểm tra lại đầu vào", "Warning", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 }
