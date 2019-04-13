@@ -11,15 +11,26 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.Point;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
@@ -31,21 +42,26 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.event.MenuListener;
+import javax.swing.event.MenuEvent;
+import javax.swing.JMenuItem;
 
 public class Form1 extends JFrame {
 
 	private JPanel contentPane,panelThuatToan;
 	private JMenuBar menuBar;
-	private JMenu menuCaiDat,menuGioiThieu,menuChonMau;
+	private JMenu menuCaiDat,menuGioiThieu;
+	private JMenuItem chonMau;
 	private JRadioButton radioButtonNhap,radioButtonRandom,radioButton,radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7;
 	private ButtonGroup buttonGroup1,buttonGroup2;
-	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStop,listbut[];
+	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[];
 	private JComboBox comboBoxFile,comboBoxRandom;
 	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[];
 	private JTextField textSo,textRandom;
 	private JTextArea textArea,textArea_1;
 	private int arr[],len,pos[];
 	private Timer timer;
+	private JButton buttonStop;
 	
 	/**
 	 * Launch the application.
@@ -55,6 +71,7 @@ public class Form1 extends JFrame {
 			public void run() {
 				try {
 					Form1 frame = new Form1();
+					//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -84,8 +101,17 @@ public class Form1 extends JFrame {
 		menuCaiDat = new JMenu("Cài Đặt");
 		menuBar.add(menuCaiDat);
 		
-		menuChonMau = new JMenu("Chọn màu nút");
-		menuCaiDat.add(menuChonMau);
+		chonMau = new JMenuItem("Chọn màu nút");
+		chonMau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Color color= JColorChooser.showDialog(null, "Chọn màu", Color.RED);
+				for(JButton b:listbut)
+				{
+					b.setBackground(color);
+				}
+			}
+		});
+		menuCaiDat.add(chonMau);
 		
 		menuGioiThieu = new JMenu("Giới Thiệu");
 		menuBar.add(menuGioiThieu);
@@ -105,11 +131,41 @@ public class Form1 extends JFrame {
 		buttonGroup1.add(radioButtonRandom);
 		
 		btnChonFile = new JButton("Chọn File");
+		btnChonFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser jfc= new JFileChooser(new File("Desktop"));
+		 //       FileFilter filter = new FileNameExtensionFilter("txt");
+		   //     jfc.setFileFilter(filter);
+				jfc.setDialogTitle("Chọn file");
+				if(jfc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION)
+				{
+					File file=jfc.getSelectedFile();
+					try {
+						Scanner sc= new Scanner(file);
+						String str;
+						while(sc.hasNext())
+						{
+							comboBoxFile.addItem(sc.nextLine());
+						}
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					System.out.print(jfc.getSelectedFile().getName());
+				}
+			}
+		});
 		btnChonFile.setBounds(119, 26, 116, 23);
 		btnChonFile.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(btnChonFile);
 		
 		comboBoxFile = new JComboBox();
+		comboBoxFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textSo.setText(comboBoxFile.getSelectedItem().toString());
+			}
+		});
 		comboBoxFile.setBounds(268, 23, 251, 29);
 		contentPane.add(comboBoxFile);
 		
@@ -124,6 +180,7 @@ public class Form1 extends JFrame {
 		textSo.setColumns(10);
 		
 		comboBoxRandom = new JComboBox();
+		comboBoxRandom.setModel(new DefaultComboBoxModel(new String[] {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"}));
 		comboBoxRandom.setBounds(142, 124, 52, 23);
 		contentPane.add(comboBoxRandom);
 		
@@ -133,6 +190,18 @@ public class Form1 extends JFrame {
 		contentPane.add(labelRandom);
 		
 		buttonRandom = new JButton("Random");
+		buttonRandom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				len=Integer.parseInt(comboBoxRandom.getSelectedItem().toString());
+				String strmang="";
+				Random rd= new Random();
+				for(int i=0;i<len;i++)
+				{
+					strmang+=(rd.nextInt(50-1+1)+1)+" ";
+				}
+				textRandom.setText(strmang);
+			}
+		});
 		buttonRandom.setBounds(268, 124, 116, 23);
 		buttonRandom.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(buttonRandom);
@@ -143,14 +212,15 @@ public class Form1 extends JFrame {
 		contentPane.add(labelRandom1);
 		
 		textRandom = new JTextField();
+		textRandom.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textRandom.setBounds(268, 158, 251, 29);
 		textRandom.setColumns(10);
 		contentPane.add(textRandom);
 		
 		panelThuatToan = new JPanel();
+		panelThuatToan.setBounds(545, 11, 320, 177);
 		panelThuatToan.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ch\u1ECDn Thu\u1EADt To\u00E1n", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panelThuatToan.setToolTipText("");
-		panelThuatToan.setBounds(545, 11, 320, 177);
 		contentPane.add(panelThuatToan);
 		panelThuatToan.setLayout(null);
 		
@@ -209,11 +279,12 @@ public class Form1 extends JFrame {
 		contentPane.add(textArea);
 		
 		labelCode = new JLabel("Code thực thi thuật toán");
-		labelCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		labelCode.setBounds(1042, 6, 172, 21);
+		labelCode.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(labelCode);
 		
 		buttonTaoNut = new JButton("Tạo Nút");
+		buttonTaoNut.setBounds(142, 197, 116, 23);
 		buttonTaoNut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!radioButtonNhap.isSelected()&&!radioButtonRandom.isSelected())
@@ -222,38 +293,75 @@ public class Form1 extends JFrame {
 				}
 				else
 				{
-					if(radioButtonNhap.isSelected())
+					if(arr!=null)
+						JOptionPane.showMessageDialog(rootPane, "Mảng số đã được tạo", "Warning",JOptionPane.WARNING_MESSAGE);
+					else
+					{
+					if(radioButtonNhap.isSelected()) 
 						xuLyChuoi(textSo.getText());
+					else
+					{
+						if(radioButtonRandom.isSelected())
+							xuLyChuoi(textRandom.getText());
+					}
+					}
 				}
 			}
 		});
 		buttonTaoNut.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		buttonTaoNut.setBounds(27, 204, 116, 23);
 		contentPane.add(buttonTaoNut);
 		
 		buttonTiepTuc = new JButton("Tiếp Tục");
+		buttonTiepTuc.setBounds(27, 277, 116, 23);
 		buttonTiepTuc.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		buttonTiepTuc.setBounds(27, 236, 116, 23);
+		buttonTiepTuc.setVisible(false);
 		contentPane.add(buttonTiepTuc);
 		
 		buttonTaoLai = new JButton("Tạo Lại");
+		buttonTaoLai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				arr=null;
+				for(JButton b:listbut)
+				{
+					contentPane.remove(b);
+				}
+				for(JLabel l:labelindex)
+				{
+					contentPane.remove(l);
+				}
+				textRandom.setText(null);
+				textSo.setText(null);
+				repaint();
+			}
+		});
+		buttonTaoLai.setBounds(231, 277, 116, 23);
 		buttonTaoLai.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		buttonTaoLai.setBounds(180, 236, 116, 23);
+		buttonTaoLai.setVisible(false);
 		contentPane.add(buttonTaoLai);
 		
-		buttonStop = new JButton("Dừng Lại");
-		buttonStop.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		buttonStop.setBounds(180, 204, 116, 23);
-		contentPane.add(buttonStop);
+		buttonStart = new JButton("Bắt Đầu");
+		buttonStart.setBounds(27, 239, 116, 23);
+		buttonStart.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonStart.setVisible(false);
+		contentPane.add(buttonStart);
 		
 		textArea_1 = new JTextArea();
 		textArea_1.setBounds(431, 198, 434, 102);
 		contentPane.add(textArea_1);
 		
+		buttonStop = new JButton("Dừng Lại");
+		buttonStop.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonStop.setBounds(231, 239, 116, 23);
+		buttonStop.setVisible(false);
+		contentPane.add(buttonStop);
+		
+		
+		
 		
 	}
 	public void xuLyChuoi(String s)
 	{
+		contentPane.setLayout(null);
 		try {
 		while(s.contains("  "))
 			s=s.replace("  ", " ");
@@ -263,10 +371,12 @@ public class Form1 extends JFrame {
 			JOptionPane.showMessageDialog(rootPane, "Nhập 2 số trở lên", "Warning", JOptionPane.WARNING_MESSAGE);
 		else
 		{
-			if(len>9)
-				JOptionPane.showMessageDialog(rootPane, "Nhập 9 số trở xuống", "Warning", JOptionPane.WARNING_MESSAGE);
+			if(len>13)
+				JOptionPane.showMessageDialog(rootPane, "Nhập 13 số trở xuống", "Warning", JOptionPane.WARNING_MESSAGE);
 			else
 			{
+				buttonTaoLai.setVisible(true);
+				buttonStart.setVisible(true);
 				arr=new int[len];
 				pos=new int[len];
 				labelindex=new JLabel[len];
@@ -275,13 +385,21 @@ public class Form1 extends JFrame {
 				{
 					arr[i]=	Integer.parseInt(cat[i]);
 					labelindex[i]= new JLabel(String.valueOf(i));
-					listbut[i]=new JButton(String.valueOf(arr[i]));
+					labelindex[i].setBounds(100*i+76,520,30,30);
+					labelindex[i].setFont(new Font("Tahoma", Font.PLAIN, 12));
+					listbut[i]= new JButton(cat[i]);
+					listbut[i].setBounds(100*i + 50, 460, 60, 60);
+					listbut[i].setFont(new Font("Tahoma", Font.PLAIN, 15));;
+					contentPane.add(labelindex[i]);
+					contentPane.add(listbut[i]);
 				}
+				repaint();								
 			}
 		}
 		}catch(Exception e)
 		{
-			JOptionPane.showMessageDialog(rootPane, "Kiểm tra lại đầu vào", "Warning", JOptionPane.WARNING_MESSAGE);
+	//		JOptionPane.showMessageDialog(rootPane, "Kiểm tra lại đầu vào", "Warning", JOptionPane.WARNING_MESSAGE);
+			e.printStackTrace();
 		}
 	}
 }
