@@ -25,7 +25,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -48,12 +50,12 @@ import javax.swing.JMenuItem;
 
 public class Form1 extends JFrame {
 
-	private JPanel contentPane,panelThuatToan;
+	private JPanel contentPane,panelThuatToan,panelChieuSapXep;
 	private JMenuBar menuBar;
 	private JMenu menuCaiDat,menuGioiThieu;
 	private JMenuItem chonMau;
-	private JRadioButton radioButtonNhap,radioButtonRandom,radioButton,radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7;
-	private ButtonGroup buttonGroup1,buttonGroup2;
+	private JRadioButton radioButtonNhap,radioButtonRandom,radiobuttonIS,radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7,radiobuttonGiamDan,radiobuttonTangDan;
+	private ButtonGroup buttonGroup1,buttonGroup2,buttonGroup3;
 	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[];
 	private JComboBox comboBoxFile,comboBoxRandom;
 	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[];
@@ -62,7 +64,8 @@ public class Form1 extends JFrame {
 	private int arr[],len,pos[];
 	private Timer timer;
 	private JButton buttonStop;
-	
+	private Color color;
+	private List<Step> list= new ArrayList<Step>();
 	/**
 	 * Launch the application.
 	 */
@@ -104,7 +107,7 @@ public class Form1 extends JFrame {
 		chonMau = new JMenuItem("Chọn màu nút");
 		chonMau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Color color= JColorChooser.showDialog(null, "Chọn màu", Color.RED);
+				color= JColorChooser.showDialog(null, "Chọn màu", Color.RED);
 				for(JButton b:listbut)
 				{
 					b.setBackground(color);
@@ -224,10 +227,10 @@ public class Form1 extends JFrame {
 		contentPane.add(panelThuatToan);
 		panelThuatToan.setLayout(null);
 		
-		radioButton = new JRadioButton("Interchange Sort");
-		radioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton.setBounds(6, 19, 135, 23);
-		panelThuatToan.add(radioButton);
+		radiobuttonIS = new JRadioButton("Interchange Sort");
+		radiobuttonIS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonIS.setBounds(6, 19, 135, 23);
+		panelThuatToan.add(radiobuttonIS);
 		
 		radioButton1 = new JRadioButton("Selection Sort");
 		radioButton1.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -265,7 +268,7 @@ public class Form1 extends JFrame {
 		panelThuatToan.add(radioButton7);
 		
 		buttonGroup2= new ButtonGroup();
-		buttonGroup2.add(radioButton);
+		buttonGroup2.add(radiobuttonIS);
 		buttonGroup2.add(radioButton1);
 		buttonGroup2.add(radioButton2);
 		buttonGroup2.add(radioButton3);
@@ -275,7 +278,7 @@ public class Form1 extends JFrame {
 		buttonGroup2.add(radioButton7);
 		
 		textArea = new JTextArea();
-		textArea.setBounds(883, 39, 467, 261);
+		textArea.setBounds(875, 39, 475, 327);
 		contentPane.add(textArea);
 		
 		labelCode = new JLabel("Code thực thi thuật toán");
@@ -340,13 +343,21 @@ public class Form1 extends JFrame {
 		contentPane.add(buttonTaoLai);
 		
 		buttonStart = new JButton("Bắt Đầu");
+		buttonStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(radiobuttonIS.isSelected())
+				{
+					
+				}
+			}
+		});
 		buttonStart.setBounds(27, 239, 116, 23);
 		buttonStart.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		buttonStart.setVisible(false);
 		contentPane.add(buttonStart);
 		
 		textArea_1 = new JTextArea();
-		textArea_1.setBounds(431, 198, 434, 102);
+		textArea_1.setBounds(431, 264, 434, 102);
 		contentPane.add(textArea_1);
 		
 		buttonStop = new JButton("Dừng Lại");
@@ -355,10 +366,32 @@ public class Form1 extends JFrame {
 		buttonStop.setVisible(false);
 		contentPane.add(buttonStop);
 		
+		panelChieuSapXep = new JPanel();
+		panelChieuSapXep.setBorder(new TitledBorder(null, "S\u1EAFp x\u1EBFp theo", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+		panelChieuSapXep.setBounds(545, 190, 320, 70);
+		contentPane.add(panelChieuSapXep);
+		panelChieuSapXep.setLayout(null);
 		
+		radiobuttonGiamDan = new JRadioButton("Giảm Dần");
+		radiobuttonGiamDan.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonGiamDan.setBounds(161, 27, 135, 23);
+		panelChieuSapXep.add(radiobuttonGiamDan);
+		
+		radiobuttonTangDan = new JRadioButton("Tăng Dần");
+		radiobuttonTangDan.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonTangDan.setBounds(6, 29, 135, 23);
+		panelChieuSapXep.add(radiobuttonTangDan);
+		
+		buttonGroup3= new ButtonGroup();
+		buttonGroup3.add(radiobuttonTangDan);
+		buttonGroup3.add(radiobuttonGiamDan);
 		
 		
 	}
+	public void addstepRS(int a, int b , int c, int d , int e, int[] x)
+    {
+        list.add(new Step(a, b, c, d, e, -1, -1, -1, x));
+    }
 	public void xuLyChuoi(String s)
 	{
 		contentPane.setLayout(null);
@@ -401,5 +434,29 @@ public class Form1 extends JFrame {
 	//		JOptionPane.showMessageDialog(rootPane, "Kiểm tra lại đầu vào", "Warning", JOptionPane.WARNING_MESSAGE);
 			e.printStackTrace();
 		}
+	}
+	class Step{
+		public int index1, index2, Xleft, Xright, check, para1, para2, para3;
+        public int[] arr;
+        public Step()
+        {
+
+        }
+        public Step(int b , int c, int d , int e , int Check , int p1 , int p2 , int p3 , int[] ar )
+        {
+            index1 = b;
+            index2 = c;
+            Xleft = d;
+            Xright = e;
+            check = Check;
+            para1 = p1;
+            para2 = p2;
+            para3 = p3;
+            arr = ar;
+        }
+        public String str()
+        {
+            return index1 + " " + index2 + " " + Xleft + " " + Xright + " " + check + " " + para1 + " " + para2 + " " + para3;
+        }
 	}
 }
