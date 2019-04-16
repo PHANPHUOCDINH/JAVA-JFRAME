@@ -54,18 +54,21 @@ public class Form1 extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu menuCaiDat,menuGioiThieu;
 	private JMenuItem chonMau;
-	private JRadioButton radioButtonNhap,radioButtonRandom,radiobuttonIS,radioButton1,radioButton2,radioButton3,radioButton4,radioButton5,radioButton6,radioButton7,radiobuttonGiamDan,radiobuttonTangDan;
+	private JRadioButton radioButtonNhap,radioButtonRandom,radiobuttonIS,radiobuttonQS,radiobuttonSS,radiobuttonShS,radiobuttonBBS,radiobuttonRdS,radiobuttonInsS,radioButton7,radiobuttonGiamDan,radiobuttonTangDan;
 	private ButtonGroup buttonGroup1,buttonGroup2,buttonGroup3;
 	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[];
 	private JComboBox comboBoxFile,comboBoxRandom;
-	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[];
+	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labeli,labelk,labelj;
 	private JTextField textSo,textRandom;
 	private JTextArea textArea,textArea_1;
-	private int arr[],len,pos[];
+	private int arr[],len,xpos[],tang_giam;
 	private Timer timer;
 	private JButton buttonStop;
-	private Color color;
+	private Color color=Color.white;
 	private List<Step> list= new ArrayList<Step>();
+	private int start = 0, green = 0, yellow = 0,indexstep=0,y1=460,y2=380,speed=4;
+	private JLabel lblNewLabel;
+	private List<String> thuattoan;
 	/**
 	 * Launch the application.
 	 */
@@ -228,39 +231,40 @@ public class Form1 extends JFrame {
 		panelThuatToan.setLayout(null);
 		
 		radiobuttonIS = new JRadioButton("Interchange Sort");
+		radiobuttonIS.setSelected(true);
 		radiobuttonIS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonIS.setBounds(6, 19, 135, 23);
 		panelThuatToan.add(radiobuttonIS);
 		
-		radioButton1 = new JRadioButton("Selection Sort");
-		radioButton1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton1.setBounds(161, 19, 135, 23);
-		panelThuatToan.add(radioButton1);
+		radiobuttonQS = new JRadioButton("Quick Sort");
+		radiobuttonQS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonQS.setBounds(161, 19, 135, 23);
+		panelThuatToan.add(radiobuttonQS);
 		
-		radioButton2 = new JRadioButton("Interchange Sort");
-		radioButton2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton2.setBounds(6, 62, 135, 23);
-		panelThuatToan.add(radioButton2);
+		radiobuttonSS = new JRadioButton("Selection Sort");
+		radiobuttonSS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonSS.setBounds(6, 62, 135, 23);
+		panelThuatToan.add(radiobuttonSS);
 		
-		radioButton3 = new JRadioButton("Selection Sort");
-		radioButton3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton3.setBounds(161, 62, 135, 23);
-		panelThuatToan.add(radioButton3);
+		radiobuttonShS = new JRadioButton("Shaker Sort");
+		radiobuttonShS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonShS.setBounds(161, 62, 135, 23);
+		panelThuatToan.add(radiobuttonShS);
 		
-		radioButton4 = new JRadioButton("Interchange Sort");
-		radioButton4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton4.setBounds(6, 107, 135, 23);
-		panelThuatToan.add(radioButton4);
+		radiobuttonBBS = new JRadioButton("Bubble Sort");
+		radiobuttonBBS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonBBS.setBounds(6, 107, 135, 23);
+		panelThuatToan.add(radiobuttonBBS);
 		
-		radioButton5 = new JRadioButton("Selection Sort");
-		radioButton5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton5.setBounds(161, 107, 135, 23);
-		panelThuatToan.add(radioButton5);
+		radiobuttonRdS = new JRadioButton("Radix Sort");
+		radiobuttonRdS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonRdS.setBounds(161, 107, 135, 23);
+		panelThuatToan.add(radiobuttonRdS);
 		
-		radioButton6 = new JRadioButton("Interchange Sort");
-		radioButton6.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton6.setBounds(6, 147, 135, 23);
-		panelThuatToan.add(radioButton6);
+		radiobuttonInsS = new JRadioButton("Insertion Sort");
+		radiobuttonInsS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonInsS.setBounds(6, 147, 135, 23);
+		panelThuatToan.add(radiobuttonInsS);
 		
 		radioButton7 = new JRadioButton("Selection Sort");
 		radioButton7.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -269,12 +273,12 @@ public class Form1 extends JFrame {
 		
 		buttonGroup2= new ButtonGroup();
 		buttonGroup2.add(radiobuttonIS);
-		buttonGroup2.add(radioButton1);
-		buttonGroup2.add(radioButton2);
-		buttonGroup2.add(radioButton3);
-		buttonGroup2.add(radioButton4);
-		buttonGroup2.add(radioButton5);
-		buttonGroup2.add(radioButton6);
+		buttonGroup2.add(radiobuttonQS);
+		buttonGroup2.add(radiobuttonSS);
+		buttonGroup2.add(radiobuttonShS);
+		buttonGroup2.add(radiobuttonBBS);
+		buttonGroup2.add(radiobuttonRdS);
+		buttonGroup2.add(radiobuttonInsS);
 		buttonGroup2.add(radioButton7);
 		
 		textArea = new JTextArea();
@@ -315,6 +319,13 @@ public class Form1 extends JFrame {
 		contentPane.add(buttonTaoNut);
 		
 		buttonTiepTuc = new JButton("Tiếp Tục");
+		buttonTiepTuc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buttonTiepTuc.setVisible(false);
+				buttonStop.setVisible(true);
+				timer.start();
+			}
+		});
 		buttonTiepTuc.setBounds(27, 277, 116, 23);
 		buttonTiepTuc.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		buttonTiepTuc.setVisible(false);
@@ -324,6 +335,7 @@ public class Form1 extends JFrame {
 		buttonTaoLai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				arr=null;
+				list.removeAll(list);
 				for(JButton b:listbut)
 				{
 					contentPane.remove(b);
@@ -332,8 +344,12 @@ public class Form1 extends JFrame {
 				{
 					contentPane.remove(l);
 				}
+				listbut=null;
+				labelindex=null;
 				textRandom.setText(null);
 				textSo.setText(null);
+				buttonStart.setVisible(true);
+				timer.stop();
 				repaint();
 			}
 		});
@@ -347,7 +363,141 @@ public class Form1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(radiobuttonIS.isSelected())
 				{
-					
+					if(radiobuttonTangDan.isSelected())
+					{
+						tang_giam=1;
+						thuattoan=ListIS(tang_giam);
+						for (int i = 0; i < arr.length - 1; i++)
+                        {
+                            for (int j = i + 1; j < arr.length; j++)
+                            {
+                                if (arr[i] > arr[j])
+                                {
+                                	list.add(new Step(i, j, listbut[i].getLocation().x, listbut[j].getLocation().x, 1,-1,-1,-1,null));
+                                    int temp = arr[i];
+                                    arr[i] = arr[j];
+                                    arr[j] = temp;
+                                }
+                                else
+                                	list.add(new Step(i, j, listbut[i].getLocation().x, listbut[j].getLocation().x, 0,-1,-1,-1,null));
+                            }
+                        }
+					}
+					else
+					{
+						tang_giam=0;
+						thuattoan=ListIS(tang_giam);
+						for (int i = 0; i < arr.length - 1; i++)
+                        {
+                            for (int j = i + 1; j < arr.length; j++)
+                            {
+                                if (arr[i] < arr[j])
+                                {
+                                	list.add(new Step(i, j, listbut[i].getLocation().x, listbut[j].getLocation().x, 1,-1,-1,-1,null));
+                                    int temp = arr[i];
+                                    arr[i] = arr[j];
+                                    arr[j] = temp;
+                                }
+                                else
+                                	list.add(new Step(i, j, listbut[i].getLocation().x, listbut[j].getLocation().x, 0,-1,-1,-1,null));
+                            }
+                        }
+					}
+					buttonStart.setVisible(false);
+					buttonStop.setVisible(true);
+					timer= new Timer(8,new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							if(start<50)
+							{
+								start++;
+							}
+							else
+							{
+								if(indexstep<list.size())
+								{
+									labeli.setLocation(xpos[list.get(indexstep).index1]+27,550);
+									labelj.setLocation(xpos[list.get(indexstep).index2]+27,550);
+									labeli.setVisible(true);
+									labelj.setVisible(true);
+									listbut[list.get(indexstep).index1].setBackground(Color.yellow); 
+				                    listbut[list.get(indexstep).index2].setBackground(Color.yellow);
+				                    if(yellow<70)
+				                    	yellow++;
+				                    else
+				                    {
+				                    	if(list.get(indexstep).check==0)
+				                    	{
+				                    		listbut[list.get(indexstep).index1].setBackground(Color.green); 
+				                    		listbut[list.get(indexstep).index2].setBackground(Color.green); 
+				                    		if(green<70)
+				                    			green++;
+				                    		else
+				                    		{
+				                    			start=green=yellow=0;
+				                    			listbut[list.get(indexstep).index1].setBackground(color); 
+					                    		listbut[list.get(indexstep).index2].setBackground(color);
+					                    		indexstep++;
+				                    		}
+				                    	}
+				                    	else
+				                    	{
+				                    		listbut[list.get(indexstep).index1].setBackground(Color.red); 
+				                    		listbut[list.get(indexstep).index2].setBackground(Color.red);
+				                    		if(y1>380)
+				                    		{
+				                    			y1-=speed;
+				                    			listbut[list.get(indexstep).index1].setLocation(new Point(listbut[list.get(indexstep).index1].getLocation().x,listbut[list.get(indexstep).index1].getLocation().y-speed));
+				                    			listbut[list.get(indexstep).index2].setLocation(new Point(listbut[list.get(indexstep).index2].getLocation().x,listbut[list.get(indexstep).index2].getLocation().y+speed));				           
+				                    		}
+				                    		else
+				                    		{
+				                    			if(list.get(indexstep).Xleft<list.get(indexstep).Xright)
+				                    			{
+				                    				list.get(indexstep).Xleft+=speed;
+				                    				listbut[list.get(indexstep).index1].setLocation(new Point(listbut[list.get(indexstep).index1].getLocation().x+speed,listbut[list.get(indexstep).index1].getLocation().y));
+					                    			listbut[list.get(indexstep).index2].setLocation(new Point(listbut[list.get(indexstep).index2].getLocation().x-speed,listbut[list.get(indexstep).index2].getLocation().y));
+				                    			}
+				                    			else
+				                    			{
+				                    				if(y2<460)
+				                    				{
+				                    					y2+=speed;
+				                    					listbut[list.get(indexstep).index1].setLocation(new Point(listbut[list.get(indexstep).index1].getLocation().x,listbut[list.get(indexstep).index1].getLocation().y+speed));
+						                    			listbut[list.get(indexstep).index2].setLocation(new Point(listbut[list.get(indexstep).index2].getLocation().x,listbut[list.get(indexstep).index2].getLocation().y-speed));
+				                    				}
+				                    				else
+				                    				{
+				                    					JButton A=listbut[list.get(indexstep).index1];
+				                    					listbut[list.get(indexstep).index1]=listbut[list.get(indexstep).index2];
+				                    					listbut[list.get(indexstep).index2]=A;
+				                    					listbut[list.get(indexstep).index1].setBackground(color); 
+							                    		listbut[list.get(indexstep).index2].setBackground(color);
+				                    					indexstep++;
+				                    					y1=460;
+				                    					y2=380;
+				                    					start=yellow=0;
+				                    				}
+				                    			}
+				                    		}
+				                    	}
+				                    }
+								}
+								else
+								{
+									indexstep=0;
+									start=yellow=0;
+									labeli.setVisible(false);
+									labelj.setVisible(false);
+									JOptionPane.showMessageDialog(rootPane, "Mảng đã sắp xếp xong", "", JOptionPane.INFORMATION_MESSAGE);
+									timer.stop();
+								}
+							}
+						}
+						
+					});
+					timer.start();
 				}
 			}
 		});
@@ -361,6 +511,13 @@ public class Form1 extends JFrame {
 		contentPane.add(textArea_1);
 		
 		buttonStop = new JButton("Dừng Lại");
+		buttonStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				buttonStop.setVisible(false);
+				buttonTiepTuc.setVisible(true);
+				timer.stop();
+			}
+		});
 		buttonStop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		buttonStop.setBounds(231, 239, 116, 23);
 		buttonStop.setVisible(false);
@@ -378,6 +535,7 @@ public class Form1 extends JFrame {
 		panelChieuSapXep.add(radiobuttonGiamDan);
 		
 		radiobuttonTangDan = new JRadioButton("Tăng Dần");
+		radiobuttonTangDan.setSelected(true);
 		radiobuttonTangDan.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonTangDan.setBounds(6, 29, 135, 23);
 		panelChieuSapXep.add(radiobuttonTangDan);
@@ -385,6 +543,29 @@ public class Form1 extends JFrame {
 		buttonGroup3= new ButtonGroup();
 		buttonGroup3.add(radiobuttonTangDan);
 		buttonGroup3.add(radiobuttonGiamDan);
+		
+		labeli = new JLabel("i");
+		labeli.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labeli.setBounds(325, 198, 12, 22);
+		labeli.setVisible(false);
+		contentPane.add(labeli);
+		
+		labelk = new JLabel("k");
+		labelk.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelk.setBounds(390, 198, 12, 22);
+		labelk.setVisible(false);
+		contentPane.add(labelk);
+		
+		labelj = new JLabel("j");
+		labelj.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelj.setBounds(431, 198, 12, 22);
+		labelj.setVisible(false);
+		contentPane.add(labelj);
+		
+		lblNewLabel = new JLabel("pos");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setBounds(468, 198, 30, 21);
+		contentPane.add(lblNewLabel);
 		
 		
 	}
@@ -411,7 +592,7 @@ public class Form1 extends JFrame {
 				buttonTaoLai.setVisible(true);
 				buttonStart.setVisible(true);
 				arr=new int[len];
-				pos=new int[len];
+				xpos=new int[len];
 				labelindex=new JLabel[len];
 				listbut= new JButton[len];
 				for(int i=0;i<len;i++)
@@ -422,7 +603,9 @@ public class Form1 extends JFrame {
 					labelindex[i].setFont(new Font("Tahoma", Font.PLAIN, 12));
 					listbut[i]= new JButton(cat[i]);
 					listbut[i].setBounds(100*i + 50, 460, 60, 60);
-					listbut[i].setFont(new Font("Tahoma", Font.PLAIN, 15));;
+					listbut[i].setFont(new Font("Tahoma", Font.PLAIN, 15));
+					listbut[i].setBackground(color);
+					xpos[i]=100*i+50;
 					contentPane.add(labelindex[i]);
 					contentPane.add(listbut[i]);
 				}
@@ -459,4 +642,20 @@ public class Form1 extends JFrame {
             return index1 + " " + index2 + " " + Xleft + " " + Xright + " " + check + " " + para1 + " " + para2 + " " + para3;
         }
 	}
+	public static List<String> ListIS(int check)
+    {
+        List<String> ListCode = new ArrayList<String>();
+        ListCode.add("for (int i = 0 ; i < N-1 ; i++)");
+        ListCode.add("    for(int j = i + 1; j < N ; j++)");
+        if (check == 1)
+        {
+            ListCode.add("        if(a[j] < a[i])");
+        }
+        else
+        {
+            ListCode.add("        if(a[j] > a[i])");
+        }
+        ListCode.add("           Swap(a[i], a[j]);");
+        return ListCode;
+    }
 }
