@@ -64,18 +64,18 @@ public class Form1 extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu menuCaiDat,menuGioiThieu;
 	private JMenuItem chonMau;
-	private JRadioButton radioButtonNhap,radioButtonRandom,radiobuttonIS,radiobuttonQS,radiobuttonSS,radiobuttonShS,radiobuttonBBS,radiobuttonRdS,radiobuttonInsS,radioButton7,radiobuttonGiamDan,radiobuttonTangDan;
+	private JRadioButton radioButtonNhap,radioButtonRandom,radiobuttonIS,radiobuttonQS,radiobuttonSS,radiobuttonShS,radiobuttonBS,radiobuttonRdS,radiobuttonInsS,radioButton7,radiobuttonGiamDan,radiobuttonTangDan;
 	private ButtonGroup buttonGroup1,buttonGroup2,buttonGroup3;
 	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[];
 	private JComboBox comboBoxFile,comboBoxRandom;
-	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labeli,labelk,labelj,labelLink,labelpos;
+	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labeli,labelk,labelj,labelLink,labelmin;
 	private JTextField textSo,textRandom;
 	private int arr[],len,xpos[],tang_giam;
 	private Timer timer;
 	private JButton buttonStop;
 	private Color color=Color.white;
 	private List<Step> list= new ArrayList<Step>();
-	private int start = 0, green = 0, yellow = 0,indexstep=0,y1=460,y2=380,speed=5,start_khoi_tao=0,orange=0;
+	private int start = 0, green = 0, yellow = 0,indexstep=0,y1=460,y2=380,speed=5,start_khoi_tao=0,orange=0,purple=0;
 	private JList<String> thuattoan;
 	private JScrollPane scrollPane;
 	private DefaultListModel<String> model= new DefaultListModel<>();
@@ -261,10 +261,10 @@ public class Form1 extends JFrame {
 		radiobuttonShS.setBounds(161, 62, 135, 23);
 		panelThuatToan.add(radiobuttonShS);
 		
-		radiobuttonBBS = new JRadioButton("Bubble Sort");
-		radiobuttonBBS.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radiobuttonBBS.setBounds(6, 107, 135, 23);
-		panelThuatToan.add(radiobuttonBBS);
+		radiobuttonBS = new JRadioButton("Bubble Sort");
+		radiobuttonBS.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonBS.setBounds(6, 107, 135, 23);
+		panelThuatToan.add(radiobuttonBS);
 		
 		radiobuttonRdS = new JRadioButton("Radix Sort");
 		radiobuttonRdS.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -286,7 +286,7 @@ public class Form1 extends JFrame {
 		buttonGroup2.add(radiobuttonQS);
 		buttonGroup2.add(radiobuttonSS);
 		buttonGroup2.add(radiobuttonShS);
-		buttonGroup2.add(radiobuttonBBS);
+		buttonGroup2.add(radiobuttonBS);
 		buttonGroup2.add(radiobuttonRdS);
 		buttonGroup2.add(radiobuttonInsS);
 		buttonGroup2.add(radioButton7);
@@ -356,6 +356,7 @@ public class Form1 extends JFrame {
 				thuattoan=null;
 				listbut=null;
 				labelindex=null;
+				xpos=null;
 				textRandom.setText(null);
 				textSo.setText(null);
 				buttonStart.setVisible(true);
@@ -603,14 +604,14 @@ public class Form1 extends JFrame {
 				                {
 				                    if (indexstep < list.size())
 				                    {
-				                        labeli.setLocation(xpos[list.get(indexstep).index1] + 27, 535);
+				                        labeli.setLocation(xpos[list.get(indexstep).index1] + 27, 550);
 				                        labeli.setVisible(true);
 				                        if (list.get(indexstep).para2 == 0)
 				                        {
-				                        	labelj.setLocation(xpos[list.get(indexstep).index2] + 27, 560);
-				                        	labelpos.setLocation(xpos[list.get(indexstep).para1] + 22, 560);
+				                        	labelj.setLocation(xpos[list.get(indexstep).index2] + 27, 580);
+				                        	labelmin.setLocation(xpos[list.get(indexstep).para1] + 19, 580);
 				                        	labelj.setVisible(true);
-				                        	labelpos.setVisible(true);
+				                        	labelmin.setVisible(true);
 				                            listbut[list.get(indexstep).para1].setBackground(Color.yellow);
 				                            listbut[list.get(indexstep).index2].setBackground(Color.yellow);
 				                            if (yellow < 80)
@@ -634,7 +635,7 @@ public class Form1 extends JFrame {
 				                                        start = 0;
 				                                        listbut[list.get(indexstep).para1].setBackground(color);
 				                                        listbut[list.get(indexstep).index2].setBackground(color);
-				                                        labelj.setVisible(false);
+				                                        //labelj.setVisible(false);
 				                                        indexstep++;
 				                                    }
 				                                }
@@ -651,7 +652,7 @@ public class Form1 extends JFrame {
 				                                        orange = 0;
 				                                        yellow = 0;
 				                                        start = 0;
-				                                        labelj.setVisible(false);
+				                                       // labelj.setVisible(false);
 				                                        listbut[list.get(indexstep).para1].setBackground(color);
 				                                        listbut[list.get(indexstep).index2].setBackground(color);
 				                                        indexstep++;
@@ -661,7 +662,7 @@ public class Form1 extends JFrame {
 				                        }
 				                        else
 				                        {
-				                            labelpos.setLocation(xpos[list.get(indexstep).para1] + 22, 560); 
+				                            labelmin.setLocation(xpos[list.get(indexstep).para1] + 19, 580); 
 				                            listbut[list.get(indexstep).para1].setBackground(Color.yellow);
 				                            listbut[list.get(indexstep).index1].setBackground(Color.yellow);
 				                            if (yellow < 65)
@@ -704,7 +705,7 @@ public class Form1 extends JFrame {
 				                                                listbut[list.get(indexstep).index1].setBackground(color);
 				                                                listbut[list.get(indexstep).para1].setBackground(color);
 				                                                indexstep++;
-				                                                y1 = 480; y2 = 400;
+				                                                y1 = 460; y2 = 380;
 				                                                start = 0;
 				                                                yellow = 0;
 				                                            }
@@ -738,7 +739,7 @@ public class Form1 extends JFrame {
 										start=yellow=0;
 										labeli.setVisible(false);
 										labelj.setVisible(false);
-										labelpos.setVisible(false);
+										labelmin.setVisible(false);
 										JOptionPane.showMessageDialog(rootPane, "Mảng đã sắp xếp xong", "", JOptionPane.INFORMATION_MESSAGE);
 										timer.stop();
 				                       
@@ -748,6 +749,181 @@ public class Form1 extends JFrame {
 						}
 					});
 					timer.start();
+				}
+				if(radiobuttonBS.isSelected())
+				{
+					if(radiobuttonTangDan.isSelected())
+					{
+						tang_giam=1;
+						for (int i = 0; i < arr.length - 1; i++)
+                        {
+                            for (int j = arr.length - 1; j > i; j--)
+                            {
+                                if (arr[j] < arr[j - 1])
+                                {
+                                    list.add(new Step(i, j - 1, j, 1, listbut[j - 1].getLocation().x, listbut[j].getLocation().x,-1,-1,null));
+                                    int temp = arr[j];
+                                    arr[j] = arr[j - 1];
+                                    arr[j - 1] = temp;
+                                }
+                                else
+                                {
+                                    list.add(new Step(i, j - 1, j, 0,-1,-1,-1,-1,null));
+                                }
+                            }
+                        }
+					}
+					else
+					{
+						tang_giam=0;
+						for (int i = 0; i < arr.length - 1; i++)
+                        {
+                            for (int j = arr.length - 1; j > i; j--)
+                            {
+                                if (arr[j] > arr[j - 1])
+                                {
+                                    list.add(new Step(i, j - 1, j, 1, listbut[j - 1].getLocation().x, listbut[j].getLocation().x,-1,-1,null));
+                                    int temp = arr[j];
+                                    arr[j] = arr[j - 1];
+                                    arr[j - 1] = temp;
+                                }	
+                                else
+                                {
+                                    list.add(new Step(i, j - 1, j, 0,-1,-1,-1,-1,null));
+                                }
+                            }
+                        }
+					}
+					buttonStart.setVisible(false);
+					buttonStop.setVisible(true);
+					thuattoan=new JList<>(model);
+					thuattoan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					thuattoan.setFont(new Font("Monospaced",Font.BOLD,14));
+					scrollPane.setViewportView(thuattoan);
+					timer= new Timer(10, new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							if (start_khoi_tao < 40)
+				            {
+				                start_khoi_tao++;
+				            }
+				            else
+				            {
+				                if (start < 58)
+				                    start++;
+				                else
+				                {
+				                    if (indexstep < list.size())
+				                    {
+				                        labeli.setLocation(xpos[list.get(indexstep).index1] + 41, 535);
+				                        labeli.setVisible(true);
+				                        labelj.setLocation(xpos[list.get(indexstep).Xleft] + 41, 565);
+				                        labelj.setVisible(true);
+				                        if (arr.length - 1 == list.get(indexstep).Xleft)
+				                        {
+				                        	
+				                        }
+				                        else
+				                        {
+
+				                        }
+				                        listbut[list.get(indexstep).index1].setBackground(Color.magenta);
+				                        if (purple < 58)
+				                            purple++;
+				                        else
+				                        {
+				                            listbut[list.get(indexstep).index2].setBackground(Color.yellow);
+				                            listbut[list.get(indexstep).Xleft].setBackground(Color.yellow);
+				                            if (yellow < 60)
+				                            {
+				                                yellow++;
+				                            }
+				                            else
+				                            {
+				                                if (list.get(indexstep).Xright == 1)
+				                                {
+				                                    listbut[list.get(indexstep).index2].setBackground(Color.red);
+				                                    listbut[list.get(indexstep).Xleft].setBackground(Color.red);
+				                                    if (y1 > 380)
+				                                    {
+				                                        y1 -= speed;
+				                                        listbut[list.get(indexstep).index2].setLocation(listbut[list.get(indexstep).index2].getLocation().x, listbut[list.get(indexstep).index2].getLocation().y - speed);
+				                                        listbut[list.get(indexstep).Xleft].setLocation(listbut[list.get(indexstep).Xleft].getLocation().x, listbut[list.get(indexstep).Xleft].getLocation().y + speed);
+				                                    }
+				                                    else
+				                                    {
+				                                        if (list.get(indexstep).check < list.get(indexstep).para1)
+				                                        {
+				                                            list.get(indexstep).check += speed;
+				                                            listbut[list.get(indexstep).index2].setLocation(listbut[list.get(indexstep).index2].getLocation().x + speed, listbut[list.get(indexstep).index2].getLocation().y);
+				                                            listbut[list.get(indexstep).Xleft].setLocation(listbut[list.get(indexstep).Xleft].getLocation().x - speed, listbut[list.get(indexstep).Xleft].getLocation().y);
+				                                        }
+				                                        else
+				                                        {
+				                                            if (y2 < 460)
+				                                            {
+				                                                y2 += speed;
+				                                                listbut[list.get(indexstep).index2].setLocation(listbut[list.get(indexstep).index2].getLocation().x, listbut[list.get(indexstep).index2].getLocation().y + speed);
+				                                                listbut[list.get(indexstep).Xleft].setLocation(listbut[list.get(indexstep).Xleft].getLocation().x, listbut[list.get(indexstep).Xleft].getLocation().y - speed);
+				                                            }
+				                                            else
+				                                            {
+				                                                JButton A = listbut[list.get(indexstep).index2];
+				                                                listbut[list.get(indexstep).index2] = listbut[list.get(indexstep).Xleft];
+				                                                listbut[list.get(indexstep).Xleft] = A;
+				                                                listbut[list.get(indexstep).index2].setBackground(color);
+				                                                listbut[list.get(indexstep).Xleft].setBackground(color);
+				                                                if (list.get(indexstep).index1 == list.get(indexstep).index2)
+				                                                {
+				                                                    listbut[list.get(indexstep).index1].setBackground(color);
+				                                                }
+				                                                indexstep++;
+				                                                y1 = 480; y2 = 400;
+				                                                start = 0;
+				                                                yellow = 0;
+				                                                purple = 0;
+				                                            }
+				                                        }
+				                                    }
+				                                }
+				                                else
+				                                {
+				                                	listbut[list.get(indexstep).index2].setBackground(Color.green);
+				                                    listbut[list.get(indexstep).Xleft].setBackground(Color.green);
+				                                    if (green < 60)
+				                                        green++;
+				                                    else
+				                                    {
+				                                        start = 0;
+				                                        yellow = 0;
+				                                        green = 0;
+				                                        purple = 0;
+				                                        listbut[list.get(indexstep).index2].setBackground(color);
+				                                        listbut[list.get(indexstep).Xleft].setBackground(color);
+				                                        if (list.get(indexstep).index1 == list.get(indexstep).index2)
+				                                        {
+				                                            listbut[list.get(indexstep).index1].setBackground(color);
+				                                        }
+				                                        indexstep++;
+				                                    }
+				                                }
+				                            }
+				                        }
+				                    }
+				                    else
+				                    {
+				                    	indexstep=0;
+										start=yellow=purple=green=orange=start_khoi_tao=0;				                  
+				                        labeli.setVisible(false);
+				                        labelj.setVisible(false);
+				                        timer.stop();
+				                    }
+				                }
+				            }
+						}
+					});
 				}
 			}
 		});
@@ -808,29 +984,29 @@ public class Form1 extends JFrame {
 		labelj.setVisible(false);
 		contentPane.add(labelj);
 		
-		labelpos = new JLabel("pos");
-		labelpos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelpos.setBounds(468, 198, 30, 21);
-		labelpos.setVisible(false);
-		contentPane.add(labelpos);
+		labelmin = new JLabel("min");
+		labelmin.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelmin.setBounds(468, 198, 30, 21);
+		labelmin.setVisible(false);
+		contentPane.add(labelmin);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(872, 31, 478, 335);
 		contentPane.add(scrollPane);
 		
 		labelLink = new JLabel("Click here for more information");
-		labelLink.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				try {
-			         
-			        Desktop.getDesktop().browse(new URI("http://www.google.com"));
-			         
-			    } catch (IOException | URISyntaxException e1) {
-			        e1.printStackTrace();
-			    }
-			}
-		});
+//		labelLink.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent arg0) {
+//				try {
+//			         
+//			        Desktop.getDesktop().browse(new URI("http://www.google.com"));
+//			         
+//			    } catch (IOException | URISyntaxException e1) {
+//			        e1.printStackTrace();
+//			    }
+//			}
+//		});
 		labelLink.setForeground(Color.BLUE);
 		labelLink.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelLink.setBounds(559, 659, 230, 21);
@@ -945,5 +1121,19 @@ public class Form1 extends JFrame {
         model.addElement("    if (min!=i)");
         model.addElement("        Swap(a[min],a[i]);");
         model.addElement("}");
+	}
+	public void CodeBS(int check)
+	{
+		model.addElement("for (int i = 0 ; i<N-1 ; i++)");
+        model.addElement("     for (int j = N - 1; j > i ; j --)");
+        if (check == 1)
+        {
+            model.addElement("          if(a[j] < a[j-1])");
+        }
+        else
+        {
+            model.addElement("          if(a[j] > a[j-1])");
+        }
+        model.addElement("               Swap(a[j], a[j-1]);");
 	}
 }
