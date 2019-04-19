@@ -59,7 +59,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 
 public class Form1 extends JFrame {
-
 	private JPanel contentPane,panelThuatToan,panelChieuSapXep;
 	private JMenuBar menuBar;
 	private JMenu menuCaiDat,menuGioiThieu;
@@ -363,6 +362,12 @@ public class Form1 extends JFrame {
 				buttonStart.setVisible(false);
 				buttonTaoLai.setVisible(false);
 				buttonStop.setVisible(false);
+				labeli.setVisible(false);
+				labelj.setVisible(false);
+				labelx.setVisible(false);
+				labelmin.setVisible(false);
+				labelk.setVisible(false);
+				labelpos.setVisible(false);
 				timer.stop();
 				repaint();
 			}
@@ -590,6 +595,7 @@ public class Form1 extends JFrame {
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
 					thuattoan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					thuattoan.setSelectedIndex(0);
 					thuattoan.setFont(new Font("Monospaced",Font.BOLD,14));
 					scrollPane.setViewportView(thuattoan);
 					timer=new Timer(10, new ActionListener() {
@@ -929,6 +935,7 @@ public class Form1 extends JFrame {
 				                        labelj.setVisible(false);
 				                        buttonStop.setVisible(false);
 				                        buttonTiepTuc.setVisible(false);
+										JOptionPane.showMessageDialog(rootPane, "Mảng đã sắp xếp xong", "", JOptionPane.INFORMATION_MESSAGE);
 				                        timer.stop();
 				                    }
 				                }
@@ -999,7 +1006,7 @@ public class Form1 extends JFrame {
 				                    if (list.get(indexstep).Xright == 1)
 				                    {
 				                       // richTextBox2.Text = (tang_giam == 1) ? "      while((pos >= 0)&&(a[pos] > x))\n      {\n            a[pos+1] = a[pos];\n            pos--;\n      }" : "      while((pos >= 0)&&(a[pos] < x))\n      {\n            a[pos+1] = a[pos];\n            pos--;\n      }";
-				                        labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 18, 550);
+				                        labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 16, 575);
 				                        labelpos.setText("pos");
 				                        listbut[list.get(indexstep).Xleft + 1].setBackground(Color.red);
 				                        listbut[list.get(indexstep).Xleft].setBackground(Color.yellow);
@@ -1020,7 +1027,7 @@ public class Form1 extends JFrame {
 				                        if (list.get(indexstep).Xright == 0)
 				                        {
 				                            labelpos.setText("pos+1");
-				                            labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 18, 580);
+				                            labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 6, 575);
 				                           // richTextBox2.Text = "a[pos+1] = x;";
 				                            listbut[list.get(indexstep).Xleft].setBackground(Color.magenta);
 				                            if (purple < 60)
@@ -1038,12 +1045,12 @@ public class Form1 extends JFrame {
 				                        {
 				                            labelpos.setText("pos");
 				                            //richTextBox2.Text = "for(int i=1 ; i<n ; i++)\n{      int x = a[i];\n       pos=i-1;";
-				                            labeli.setLocation(listbut[list.get(indexstep).index1].getLocation().x + 27, listbut[list.get(indexstep).index1].getLocation().y + 30);
+				                            labeli.setLocation(listbut[list.get(indexstep).index1].getLocation().x + 27, listbut[list.get(indexstep).index1].getLocation().y + 90);
 				                            labeli.setVisible(true);
-				                            labelx.setLocation(listbut[list.get(indexstep).index1].getLocation().x, listbut[list.get(indexstep).index1].getLocation().y + 60);
+				                            labelx.setLocation(listbut[list.get(indexstep).index1].getLocation().x+5, listbut[list.get(indexstep).index1].getLocation().y - 25);
 				                            labelx.setVisible(true);
-				                            labelx.setText("x = t[i] = " + list.get(indexstep).index2);
-				                            labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 18, 453);
+				                            labelx.setText("x = "+list.get(indexstep).index2);
+				                            labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 18, 575);
 				                            labelpos.setVisible(true);
 				                            if (orange < 10)
 				                                orange++;
@@ -1071,12 +1078,28 @@ public class Form1 extends JFrame {
 				                    //richTextBox2.Text = "";
 				                    labelpos.setVisible(false);
 				                    labelpos.setText("pos");
+									JOptionPane.showMessageDialog(rootPane, "Mảng đã sắp xếp xong", "", JOptionPane.INFORMATION_MESSAGE);
 				                    timer.stop();
 				                }
 				            }
 						}
 					});
 					timer.start();
+				}
+				if(radiobuttonQS.isSelected())
+				{
+					if(radiobuttonTangDan.isSelected())
+					{
+						tang_giam=1;
+						CodeQS(tang_giam);
+						quickSort(arr, 0, arr.length - 1, listbut, tang_giam);
+					}
+					else
+					{
+						tang_giam=0;
+						CodeQS(tang_giam);
+						quickSort(arr, 0, arr.length - 1, listbut, tang_giam);
+					}
 				}
 			}
 		});
@@ -1120,25 +1143,25 @@ public class Form1 extends JFrame {
 		buttonGroup3.add(radiobuttonGiamDan);
 		
 		labeli = new JLabel("i");
-		labeli.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labeli.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labeli.setBounds(325, 198, 12, 22);
 		labeli.setVisible(false);
 		contentPane.add(labeli);
 		
 		labelk = new JLabel("k");
-		labelk.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelk.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labelk.setBounds(390, 198, 12, 22);
 		labelk.setVisible(false);
 		contentPane.add(labelk);
 		
 		labelj = new JLabel("j");
-		labelj.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelj.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labelj.setBounds(431, 198, 12, 22);
 		labelj.setVisible(false);
 		contentPane.add(labelj);
 		
 		labelmin = new JLabel("min");
-		labelmin.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelmin.setFont(new Font("Tahoma", Font.BOLD, 16));
 		labelmin.setBounds(468, 198, 30, 21);
 		labelmin.setVisible(false);
 		contentPane.add(labelmin);
@@ -1168,13 +1191,13 @@ public class Form1 extends JFrame {
 		contentPane.add(labelLink);
 		
 		labelpos = new JLabel("pos");
-		labelpos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelpos.setBounds(478, 230, 30, 21);
+		labelpos.setFont(new Font("Tahoma", Font.BOLD, 16));
+		labelpos.setBounds(478, 230, 63, 21);
 		contentPane.add(labelpos);
 		
-		labelx = new JLabel("x = a[i]");
-		labelx.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelx.setBounds(357, 231, 74, 21);
+		labelx = new JLabel("x = arr[i]");
+		labelx.setFont(new Font("Tahoma", Font.BOLD, 16));
+		labelx.setBounds(357, 231, 104, 21);
 		contentPane.add(labelx);
 		
 		
@@ -1252,19 +1275,76 @@ public class Form1 extends JFrame {
             return index1 + " " + index2 + " " + Xleft + " " + Xright + " " + check + " " + para1 + " " + para2 + " " + para3;
         }
 	}
+	 public void quickSort(int arr[], int low, int high, JButton[] list, int tang_giam)
+     {
+         if (low < high)
+         {
+             int pi = partition(arr, low, high, list, tang_giam);
+             quickSort(arr, low, pi - 1, list, tang_giam);
+             quickSort(arr, pi + 1, high, list, tang_giam);
+         }
+     }
+	 public int partition(int[] arr, int low, int high, JButton[] list, int tang_giam)
+     {
+         int pivot = arr[high];
+         int i = low - 1;
+         addstepQS(i, -1, low, high, 0);
+         for (int j = low; j < high; j++)
+         {
+             if (tang_giam == 1)
+             {
+                 if (arr[j] <= pivot)
+                 {
+                     i++;
+                     addstepQS(i, j, list[i].getLocation().x, list[j].getLocation().x, 1);
+                     int temp = arr[i];
+                     arr[i] = arr[j];
+                     arr[j] = temp;
+                 }
+                 else
+                 {
+                     addstepQS(i, j, -1, list[j].getLocation().x, 3);
+                 }
+             }
+             else
+             {
+                 if (arr[j] >= pivot)
+                 {
+                     i++;
+                     addstepQS(i, j, list[i].getLocation().x, list[j].getLocation().x, 1);
+                     int temp = arr[i];
+                     arr[i] = arr[j];
+                     arr[j] = temp;
+                 }
+                 else
+                 {
+                     addstepQS(i, j, -1, list[j].getLocation().x, 3);
+                 }
+             }
+         }
+         addstepQS(i, list[i + 1].getLocation().x, list[high].getLocation().x, high, 2);
+         int temp1 = arr[i + 1];
+         arr[i + 1] = arr[high];
+         arr[high] = temp1;
+         return i + 1;
+     }
+	 public void addstepQS(int a , int b , int c , int d, int e)
+     {
+         list.add(new Step(a, b, c, d, e,-1,-1,-1,null));
+     }
 	public void CodeIS(int check)
     {
         model.addElement("for (int i = 0 ; i < N-1 ; i++)");
         model.addElement("    for(int j = i + 1; j < N ; j++)");
         if (check == 1)
         {
-            model.addElement("        if(a[j] < a[i])");
+            model.addElement("        if(arr[j] < arr[i])");
         }
         else
         {
-            model.addElement("        if(a[j] > a[i])");
+            model.addElement("        if(arr[j] > arr[i])");
         }
-        model.addElement("           Swap(a[i], a[j]);");
+        model.addElement("           Swap(arr[i], arr[j]);");
     }
 	public void CodeSS(int check)
 	{
@@ -1274,15 +1354,15 @@ public class Form1 extends JFrame {
         model.addElement("    for(j = i + 1; j < N ; j++)");
         if (check == 1)
         {
-            model.addElement("        if(a[j] < a[min])");
+            model.addElement("        if(arr[j] < arr[min])");
         }
         else
         {
-            model.addElement("        if(a[j] > a[min])");
+            model.addElement("        if(arr[j] > arr[min])");
         }
         model.addElement("            min = j;");
         model.addElement("    if (min!=i)");
-        model.addElement("        Swap(a[min],a[i]);");
+        model.addElement("        Swap(arr[min],arr[i]);");
         model.addElement("}");
 	}
 	public void CodeBS(int check)
@@ -1291,32 +1371,66 @@ public class Form1 extends JFrame {
         model.addElement("     for (int j = N - 1; j > i ; j --)");
         if (check == 1)
         {
-            model.addElement("          if(a[j] < a[j-1])");
+            model.addElement("          if(arr[j] < arr[j-1])");
         }
         else
         {
-            model.addElement("          if(a[j] > a[j-1])");
+            model.addElement("          if(arr[j] > arr[j-1])");
         }
-        model.addElement("               Swap(a[j], a[j-1]);");
+        model.addElement("               Swap(arr[j], arr[j-1]);");
 	}
 	public void CodeInS(int check)
 	{
 		model.addElement("for(int i=1 ; i<n ; i++)\n{");
-        model.addElement("        int x = a[i];");
+        model.addElement("        int x = arr[i];");
         model.addElement("        int pos = i-1;");
         if (check == 1)
         {
-            model.addElement("        while((pos >= 0)&&(a[pos] > x))");
+            model.addElement("        while((pos >= 0)&&(arr[pos] > x))");
         }
         else
         {
-            model.addElement("        while((pos >= 0)&&(a[pos] < x))");
+            model.addElement("        while((pos >= 0)&&(arr[pos] < x))");
         }
         model.addElement("        {");
-        model.addElement("              a[pos+1] = a[pos];");
+        model.addElement("              arr[pos+1] = arr[pos];");
         model.addElement("              pos--;");
         model.addElement("        }");
-        model.addElement("        a[pos+1] = x;");
+        model.addElement("        arr[pos+1] = x;");
         model.addElement("}");
+	}
+	public void CodeQS(int check)
+	{
+		 model.addElement("int partition(int []a,int low,int high)\n{");
+         model.addElement("      int pivot = a[high];");
+         model.addElement("      int i = (low - 1);");
+         model.addElement("      for (int j = low; j < high; j++)");
+         model.addElement("      {");
+         if (check == 1)
+         {
+             model.addElement("            if (a[j] <= pivot)");
+         }
+         else
+         {
+             model.addElement("            if (a[j] >= pivot)");
+         }
+         model.addElement("            {");
+         model.addElement("                  i++;");
+         model.addElement("                  Swap(a[i],a[j]);");
+         model.addElement("            }");
+         model.addElement("      }");
+         model.addElement("      Swap(temp1,a[i+1]);");
+         model.addElement("      return i+1;");
+         model.addElement("}");
+         model.addElement("");
+         model.addElement("");
+         model.addElement("void quickSort(int []a, int low, int high)\n{");
+         model.addElement("      if (low < high)");
+         model.addElement("      {");
+         model.addElement("           int pivot = partition(a, low, high);");
+         model.addElement("           quickSort(a, low, pivot-1);");
+         model.addElement("           quickSort(a, pivot+1, high);");
+         model.addElement("      }");
+         model.addElement("}");
 	}
 }
