@@ -1766,6 +1766,17 @@ public class Form1 extends JFrame {
 					});
 					timer.start();
 				}
+				if(radiobuttonRdS.isSelected())
+				{
+					if(radiobuttonTangDan.isSelected())
+					{
+						tang_giam=1;
+					}
+					else
+					{
+						tang_giam=0;
+					}
+				}
 			}
 		});
 		buttonStart.setBounds(27, 239, 116, 23);
@@ -1899,10 +1910,6 @@ public class Form1 extends JFrame {
 		
 		
 	}
-	public void addstepRS(int a, int b , int c, int d , int e, int[] x)
-    {
-        list.add(new Step(a, b, c, d, e, -1, -1, -1, x));
-    }
 	public void xuLyChuoi(String s)
 	{
 		contentPane.setLayout(null);
@@ -2028,6 +2035,57 @@ public class Form1 extends JFrame {
 	 public void addstepQS(int a , int b , int c , int d, int e)
      {
          list.add(new Step(a, b, c, d, e,-1,-1,-1,null));
+     }
+	 public void radixsort(int[] arr, int n, JButton[] list, int check)
+     {
+         int m = getMax(arr, n);
+         addstepRS(-1, -1, -1, -1, 0,null);
+         for (int exp = 1; m / exp > 0; exp *= 10)
+         {
+             addstepRS(m, exp, -1, -1, 1, arr);
+             countSort(arr, n, exp, list, check);
+         }
+         addstepRS(-1, -1, -1, -1, 4,null);
+     }
+	 public int getMax(int[] arr, int n)
+     {
+         int mx = arr[0];
+         for (int i = 1; i < n; i++)
+             if (arr[i] > mx)
+                 mx = arr[i];
+         return mx;
+     }
+	 public void addstepRS(int a, int b , int c , int d, int e, int[] x )
+     {
+         list.add(new Step(a, b, c, d, e, -1, -1, -1, x));
+     }
+	 public void countSort(int[] arr, int n, int exp, JButton[] list, int check)
+     {
+         int[] output = new int[n];
+         int[] count = new int[10];
+         for (int i = 0; i < n; i++)
+             count[(arr[i] / exp) % 10]++;
+         if (check == 1)
+         {
+             for (int i = 1; i < 10; i++)
+                 count[i] += count[i - 1];
+         }
+         else
+         {
+             for (int i = 8; i >= 0; i--)
+                 count[i] += count[i + 1];
+         }
+         for (int i = n - 1; i >= 0; i--)
+         {
+             output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+             count[(arr[i] / exp) % 10]--;
+         }
+         for (int i = 0; i < n; i++)
+         {
+             arr[i] = output[i];
+             addstepRS(i, arr[i], -1, -1, 2, null);
+         }
+         addstepRS(-1, -1, -1, -1, 3, null);
      }
 	public void CodeIS(int check)
     {
@@ -2167,6 +2225,48 @@ public class Form1 extends JFrame {
         model.addElement("                      }");
         model.addElement("           }");
         model.addElement("           right=k;");
+        model.addElement("}");
+	}
+	public void CodeRdS(int check)
+	{
+		model.addElement("static void radixsort(int []a,int n)\n{");
+        model.addElement("      int m = getMax(a, n);");
+        model.addElement("      for (int exp = 1; m / exp > 0; exp *= 10)");
+        model.addElement("      {");
+        model.addElement("            countSort(a, n, exp);");
+        model.addElement("      }");
+        model.addElement("}");
+        model.addElement("static int getMax(int []a,int n)\n{");
+        model.addElement("      int mx = a[0];");
+        model.addElement("      for (int i = 1; i < n; i++)");
+        model.addElement("            if (a[i] > mx)");
+        model.addElement("                 mx = a[i];");
+        model.addElement("return mx;");
+        model.addElement("}");
+        model.addElement("static void countSort(int []a, int n, int exp)\n{");
+        model.addElement("      int[] output = new int[n];");
+        model.addElement("      int[] count = new int[10];");
+        model.addElement("      for (int i = 0; i < n; i++)");
+        model.addElement("            count[(a[i] / exp) % 10]++;");
+        if (check == 1)
+        {
+            model.addElement("      for (int i = 1; i < 10; i++)");
+            model.addElement("            count[i] += count[i - 1];");
+        }
+        else
+        {
+            model.addElement("      for (int i = 8; i >= 0; i--)");
+            model.addElement("            count[i] += count[i + 1];");
+        }
+        model.addElement("      for (int i = n - 1; i >= 0; i--)");
+        model.addElement("      {");
+        model.addElement("            output[count[(a[i] / exp) % 10] - 1] = a[i];");
+        model.addElement("            count[(a[i] / exp) % 10]--;");
+        model.addElement("      }");
+        model.addElement("      for (int i = 0; i < n; i++)");
+        model.addElement("      {");
+        model.addElement("            a[i] = output[i];");
+        model.addElement("      }");
         model.addElement("}");
 	}
 }
