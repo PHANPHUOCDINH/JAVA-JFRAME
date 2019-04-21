@@ -67,7 +67,7 @@ public class Form1 extends JFrame {
 	private ButtonGroup buttonGroup1,buttonGroup2,buttonGroup3;
 	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[];
 	private JComboBox comboBoxFile,comboBoxRandom;
-	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labeli,labelk,labelj,labelLink,labelmin,labelpos,labelArrowR,labelx,labelArrowL;
+	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labelindex1[],labeli,labelk,labelj,labelLink,labelmin,labelpos,labelArrowR,labelx,labelArrowL,labelleft,labelright,labeldonvi;
 	private JTextField textSo,textRandom;
 	private int arr[],len,xpos[],tang_giam;
 	private Timer timer;
@@ -122,7 +122,7 @@ public class Form1 extends JFrame {
 		chonMau = new JMenuItem("Chọn màu nút");
 		chonMau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				color= JColorChooser.showDialog(null, "Chọn màu", Color.RED);
+				color= JColorChooser.showDialog(null, "Chọn màu", Color.red);
 				for(JButton b:listbut)
 				{
 					b.setBackground(color);
@@ -1434,21 +1434,23 @@ public class Form1 extends JFrame {
 							// TODO Auto-generated method stub
 							if (start_khoi_tao < 57)
 				            {
-				                richTextBox2.Text = "";
+				           //     richTextBox2.Text = "";
 				                start_khoi_tao++;
 				            }
 				            else
 				            {
-				                if (indexstep < list.Count)
+				                if (indexstep < list.size())
 				                {
-				                    if (list[indexstep].check == 0)
+				                    if (list.get(indexstep).check == 0)
 				                    {
-				                        label18.Visible = false;
-				                        label14.Location = new Point(xpos[list[indexstep].index1] + 32, 535);
-				                        label16.Location = new Point(xpos[list[indexstep].index2] + 30, 562);
-				                        label25.Location = new Point(xpos[list[indexstep].Xleft] + 39, 590);
-				                        label14.Visible = label16.Visible = label25.Visible = true;
-				                        richTextBox2.Text = "int left = 0,right = t.Length - 1,k = t.Length - 1;";
+				                        labelj.setVisible(false);
+				                        labelleft.setLocation(xpos[list.get(indexstep).index1] + 32, 535);
+				                        labelright.setLocation(xpos[list.get(indexstep).index2] + 30, 562);
+				                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 39, 590);
+				                        labelleft.setVisible(true);
+				                        labelright.setVisible(true);
+				                        labelk.setVisible(true);
+				                   //     richTextBox2.Text = "int left = 0,right = t.Length - 1,k = t.Length - 1;";
 				                        if (purple < 50)
 				                            purple++;
 				                        else
@@ -1460,15 +1462,15 @@ public class Form1 extends JFrame {
 				                    }
 				                    else
 				                    {
-				                        if (list[indexstep].check == 1)
+				                        if (list.get(indexstep).check == 1)
 				                        {
-				                            if (list[indexstep].para1 == 1)
+				                            if (list.get(indexstep).para1 == 1)
 				                            {
-				                                richTextBox2.Text = "for (int j = right; j > left; j--)";
-				                                label12.Location = new Point(xpos[list[indexstep].para2] + 66, 450);
-				                                label18.Location = new Point(xpos[list[indexstep].para3] + 41, 440);
-				                                label12.Visible = true;
-				                                label18.Visible = true;
+				                             //   richTextBox2.Text = "for (int j = right; j > left; j--)";
+				                                labelArrowL.setLocation(xpos[list.get(indexstep).para2] + 66, 450);
+				                                labelj.setLocation(xpos[list.get(indexstep).para3] + 41, 440);
+				                                labelArrowL.setVisible(true);
+				                                labelj.setVisible(true);
 				                                if (yellow < 35)
 				                                {
 				                                    yellow++;
@@ -1477,54 +1479,54 @@ public class Form1 extends JFrame {
 				                                {
 				                                    if (purple < 35)
 				                                    {
-				                                        richTextBox2.Text = (tang_giam == 1) ? "a[j] < a[j-1]?" : "a[j] > a[j-1]?";
+				                                      //  richTextBox2.Text = (tang_giam == 1) ? "a[j] < a[j-1]?" : "a[j] > a[j-1]?";
 				                                        purple++;
 				                                    }
 				                                    else
 				                                    {
-				                                        richTextBox2.Text = "Swap(a[j],a[j-1]);";
-				                                        listbut[list[indexstep].para3].BackColor = Color.Red;
-				                                        listbut[list[indexstep].Xright].BackColor = Color.Red;
-				                                        if (red < 40)
-				                                            red++;
+				                                        //richTextBox2.Text = "Swap(a[j],a[j-1]);";
+				                                        listbut[list.get(indexstep).para3].setBackground(Color.red);;
+				                                        listbut[list.get(indexstep).Xright].setBackground(Color.red);
+				                                        if (orange < 40)
+				                                            orange++;
 				                                        else
 				                                        {
-				                                            if (y1 > 400)
+				                                            if (y1 > 380)
 				                                            {
 				                                                y1 -= speed;
-				                                                listbut[list[indexstep].Xright].Location = new Point(listbut[list[indexstep].Xright].Location.X, listbut[list[indexstep].Xright].Location.Y - speed);
-				                                                listbut[list[indexstep].para3].Location = new Point(listbut[list[indexstep].para3].Location.X, listbut[list[indexstep].para3].Location.Y + speed);
+				                                                listbut[list.get(indexstep).Xright].setLocation(listbut[list.get(indexstep).Xright].getLocation().x, listbut[list.get(indexstep).Xright].getLocation().y - speed);
+				                                                listbut[list.get(indexstep).para3].setLocation(listbut[list.get(indexstep).para3].getLocation().x, listbut[list.get(indexstep).para3].getLocation().y + speed);
 				                                            } //y=30
 				                                            else
 				                                            {
-				                                                if (list[indexstep].index1 < list[indexstep].index2)
+				                                                if (list.get(indexstep).index1 < list.get(indexstep).index2)
 				                                                {
-				                                                    list[indexstep].index1 += speed;
-				                                                    listbut[list[indexstep].Xright].Location = new Point(listbut[list[indexstep].Xright].Location.X + speed, listbut[list[indexstep].Xright].Location.Y);
-				                                                    listbut[list[indexstep].para3].Location = new Point(listbut[list[indexstep].para3].Location.X - speed, listbut[list[indexstep].para3].Location.Y);
+				                                                    list.get(indexstep).index1 += speed;
+				                                                    listbut[list.get(indexstep).Xright].setLocation(listbut[list.get(indexstep).Xright].getLocation().x + speed, listbut[list.get(indexstep).Xright].getLocation().y);
+				                                                    listbut[list.get(indexstep).para3].setLocation(listbut[list.get(indexstep).para3].getLocation().x - speed, listbut[list.get(indexstep).para3].getLocation().y);
 				                                                }
 				                                                else
 				                                                {
-				                                                    if (y2 < 480)
+				                                                    if (y2 < 460)
 				                                                    {
 				                                                        y2 += speed;
-				                                                        listbut[list[indexstep].Xright].Location = new Point(listbut[list[indexstep].Xright].Location.X, listbut[list[indexstep].Xright].Location.Y + speed);
-				                                                        listbut[list[indexstep].para3].Location = new Point(listbut[list[indexstep].para3].Location.X, listbut[list[indexstep].para3].Location.Y - speed);
+				                                                        listbut[list.get(indexstep).Xright].setLocation(listbut[list.get(indexstep).Xright].getLocation().x, listbut[list.get(indexstep).Xright].getLocation().y + speed);
+				                                                        listbut[list.get(indexstep).para3].setLocation(listbut[list.get(indexstep).para3].getLocation().x, listbut[list.get(indexstep).para3].getLocation().y - speed);
 				                                                    }
 				                                                    else
 				                                                    {
-				                                                        label25.Location = new Point(xpos[list[indexstep].Xleft] + 39, 590);
-				                                                        Button A = listbut[list[indexstep].Xright];
-				                                                        listbut[list[indexstep].Xright] = listbut[list[indexstep].para3];
-				                                                        listbut[list[indexstep].para3] = A;
-				                                                        listbut[list[indexstep].Xright].BackColor = color;
-				                                                        listbut[list[indexstep].para3].BackColor = color;
+				                                                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 39, 590);
+				                                                        JButton A = listbut[list.get(indexstep).Xright];
+				                                                        listbut[list.get(indexstep).Xright] = listbut[list.get(indexstep).para3];
+				                                                        listbut[list.get(indexstep).para3] = A;
+				                                                        listbut[list.get(indexstep).Xright].setBackground(color);
+				                                                        listbut[list.get(indexstep).para3].setBackground(color);
 				                                                        indexstep++;
-				                                                        y1 = 480; y2 = 400;
+				                                                        y1 = 460; y2 = 380;
 				                                                        start = 0;
 				                                                        yellow = purple = 0;
 				                                                        start_khoi_tao = 0;
-				                                                        red = 0;
+				                                                        orange = 0;
 				                                                    }
 				                                                }
 				                                            }
@@ -1534,11 +1536,11 @@ public class Form1 extends JFrame {
 				                            }
 				                            else
 				                            {
-				                                richTextBox2.Text = "for (int j = left; j < right; j++)";
-				                                label11.Location = new Point(xpos[list[indexstep].para2] - 6, 450);
-				                                label18.Location = new Point(xpos[list[indexstep].Xright] + 41, 440);
-				                                label11.Visible = true;
-				                                label18.Visible = true;
+				                              //  richTextBox2.Text = "for (int j = left; j < right; j++)";
+				                                labelArrowR.setLocation(xpos[list.get(indexstep).para2] - 6, 450);
+				                                labelj.setLocation(xpos[list.get(indexstep).Xright] + 41, 440);
+				                                labelArrowR.setVisible(true);
+				                                labelj.setVisible(true);
 				                                if (yellow < 30)
 				                                {
 				                                    yellow++;
@@ -1547,54 +1549,54 @@ public class Form1 extends JFrame {
 				                                {
 				                                    if (purple < 35)
 				                                    {
-				                                        richTextBox2.Text = (tang_giam == 1) ? "a[j] > a[j+1]?" : "a[j] < a[j+1]?";
+				                                     //   richTextBox2.Text = (tang_giam == 1) ? "a[j] > a[j+1]?" : "a[j] < a[j+1]?";
 				                                        purple++;
 				                                    }
 				                                    else
 				                                    {
-				                                        richTextBox2.Text = "Swap(a[j],a[j+1]);";
-				                                        listbut[list[indexstep].para3].BackColor = Color.Red;
-				                                        listbut[list[indexstep].Xright].BackColor = Color.Red;
-				                                        if (red < 40)
-				                                            red++;
+				                                       // richTextBox2.Text = "Swap(a[j],a[j+1]);";
+				                                        listbut[list.get(indexstep).para3].setBackground(Color.red);
+				                                        listbut[list.get(indexstep).Xright].setBackground(Color.red);
+				                                        if (orange < 40)
+				                                            orange++;
 				                                        else
 				                                        {
-				                                            if (y1 > 400)
+				                                            if (y1 > 380)
 				                                            {
 				                                                y1 -= speed;
-				                                                listbut[list[indexstep].Xright].Location = new Point(listbut[list[indexstep].Xright].Location.X, listbut[list[indexstep].Xright].Location.Y - speed);
-				                                                listbut[list[indexstep].para3].Location = new Point(listbut[list[indexstep].para3].Location.X, listbut[list[indexstep].para3].Location.Y + speed);
+				                                                listbut[list.get(indexstep).Xright].setLocation(listbut[list.get(indexstep).Xright].getLocation().x, listbut[list.get(indexstep).Xright].getLocation().y - speed);
+				                                                listbut[list.get(indexstep).para3].setLocation(listbut[list.get(indexstep).para3].getLocation().x, listbut[list.get(indexstep).para3].getLocation().y + speed);
 				                                            } //y=30
 				                                            else
 				                                            {
-				                                                if (list[indexstep].index1 < list[indexstep].index2)
+				                                                if (list.get(indexstep).index1 < list.get(indexstep).index2)
 				                                                {
-				                                                    list[indexstep].index1 += speed;
-				                                                    listbut[list[indexstep].Xright].Location = new Point(listbut[list[indexstep].Xright].Location.X + speed, listbut[list[indexstep].Xright].Location.Y);
-				                                                    listbut[list[indexstep].para3].Location = new Point(listbut[list[indexstep].para3].Location.X - speed, listbut[list[indexstep].para3].Location.Y);
+				                                                    list.get(indexstep).index1 += speed;
+				                                                    listbut[list.get(indexstep).Xright].setLocation(listbut[list.get(indexstep).Xright].getLocation().x + speed, listbut[list.get(indexstep).Xright].getLocation().y);
+				                                                    listbut[list.get(indexstep).para3].setLocation(listbut[list.get(indexstep).para3].getLocation().x - speed, listbut[list.get(indexstep).para3].getLocation().y);
 				                                                }
 				                                                else
 				                                                {
-				                                                    if (y2 < 480)
+				                                                    if (y2 < 460)
 				                                                    {
 				                                                        y2 += speed;
-				                                                        listbut[list[indexstep].Xright].Location = new Point(listbut[list[indexstep].Xright].Location.X, listbut[list[indexstep].Xright].Location.Y + speed);
-				                                                        listbut[list[indexstep].para3].Location = new Point(listbut[list[indexstep].para3].Location.X, listbut[list[indexstep].para3].Location.Y - speed);
+				                                                        listbut[list.get(indexstep).Xright].setLocation(listbut[list.get(indexstep).Xright].getLocation().x, listbut[list.get(indexstep).Xright].getLocation().y + speed);
+				                                                        listbut[list.get(indexstep).para3].setLocation(listbut[list.get(indexstep).para3].getLocation().x, listbut[list.get(indexstep).para3].getLocation().y - speed);
 				                                                    }
 				                                                    else
 				                                                    {
-				                                                        label25.Location = new Point(xpos[list[indexstep].Xleft] + 39, 590);
-				                                                        Button A = listbut[list[indexstep].Xright];
-				                                                        listbut[list[indexstep].Xright] = listbut[list[indexstep].para3];
-				                                                        listbut[list[indexstep].para3] = A;
-				                                                        listbut[list[indexstep].Xright].BackColor = color;
-				                                                        listbut[list[indexstep].para3].BackColor = color;
+				                                                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 39, 590);
+				                                                        JButton A = listbut[list.get(indexstep).Xright];
+				                                                        listbut[list.get(indexstep).Xright] = listbut[list.get(indexstep).para3];
+				                                                        listbut[list.get(indexstep).para3] = A;
+				                                                        listbut[list.get(indexstep).Xright].setBackground(color);
+				                                                        listbut[list.get(indexstep).para3].setBackground(color);
 				                                                        indexstep++;
-				                                                        y1 = 480; y2 = 400;
+				                                                        y1 = 460; y2 = 380;
 				                                                        start = 0;
 				                                                        yellow = purple = 0;
 				                                                        start_khoi_tao = 0;
-				                                                        red = 0;
+				                                                        orange = 0;
 				                                                    }
 				                                                }
 				                                            }
@@ -1605,37 +1607,37 @@ public class Form1 extends JFrame {
 				                        }
 				                        else
 				                        {
-				                            if (list[indexstep].check == 2)
+				                            if (list.get(indexstep).check == 2)
 				                            {
-				                                if (list[indexstep].para1 == 1)
+				                                if (list.get(indexstep).para1 == 1)
 				                                {
-				                                    richTextBox2.Text = "for (int j = right; j < left; j--)";
-				                                    label18.Location = new Point(xpos[list[indexstep].Xright] + 41, 440);
-				                                    label12.Location = new Point(xpos[list[indexstep].index2] + 66, 450);
-				                                    label12.Visible = true;
-				                                    label18.Visible = true;
-				                                    if (red < 40)
-				                                        red++;
+				                                 //   richTextBox2.Text = "for (int j = right; j < left; j--)";
+				                                    labelj.setLocation(xpos[list.get(indexstep).Xright] + 41, 440);
+				                                    labelArrowL.setLocation(xpos[list.get(indexstep).index2] + 66, 450);
+				                                    labelArrowL.setVisible(true);
+				                                    labelj.setVisible(true);
+				                                    if (orange < 40)
+				                                        orange++;
 				                                    else
 				                                    {
 				                                        if (purple < 35)
 				                                        {
-				                                            richTextBox2.Text = (tang_giam == 1) ? "a[j] < a[j-1]?" : "a[j] > a[j-1]?";
+				                                            //richTextBox2.Text = (tang_giam == 1) ? "a[j] < a[j-1]?" : "a[j] > a[j-1]?";
 				                                            purple++;
 				                                        }
 				                                        else
 				                                        {
-				                                            richTextBox2.Text = "";
-				                                            listbut[list[indexstep].para3].BackColor = Color.Green;
-				                                            listbut[list[indexstep].Xright].BackColor = Color.Green;
+				                                            //richTextBox2.Text = "";
+				                                            listbut[list.get(indexstep).para3].setBackground(Color.green);
+				                                            listbut[list.get(indexstep).Xright].setBackground(Color.green);
 				                                            if (green < 40)
 				                                                green++;
 				                                            else
 				                                            {
 				                                                purple = 0;
-				                                                listbut[list[indexstep].para3].BackColor = color;
-				                                                listbut[list[indexstep].Xright].BackColor = color;
-				                                                green = red = 0;
+				                                                listbut[list.get(indexstep).para3].setBackground(color);
+				                                                listbut[list.get(indexstep).Xright].setBackground(color);
+				                                                green = orange = 0;
 				                                                start_khoi_tao = 0;
 				                                                indexstep++;
 				                                            }
@@ -1644,32 +1646,32 @@ public class Form1 extends JFrame {
 				                                }
 				                                else
 				                                {
-				                                    richTextBox2.Text = "for (int j = left; j < right; j++)";
-				                                    label18.Location = new Point(xpos[list[indexstep].Xright] + 41, 440);
-				                                    label11.Location = new Point(xpos[list[indexstep].index1] - 6, 450);
-				                                    label11.Visible = true;
-				                                    label18.Visible = true;
-				                                    if (red < 35)
-				                                        red++;
+				                                //    richTextBox2.Text = "for (int j = left; j < right; j++)";
+				                                    labelj.setLocation(xpos[list.get(indexstep).Xright] + 41, 440);
+				                                    labelArrowR.setLocation(xpos[list.get(indexstep).index1] - 6, 450);
+				                                    labelArrowR.setVisible(true);
+				                                    labelj.setVisible(true);
+				                                    if (orange < 35)
+				                                        orange++;
 				                                    else
 				                                    {
 				                                        if (purple < 35)
 				                                        {
-				                                            richTextBox2.Text = (tang_giam == 1) ? "a[j] > a[j+1]?" : "a[j] < a[j+1]?";
+				                                            //richTextBox2.Text = (tang_giam == 1) ? "a[j] > a[j+1]?" : "a[j] < a[j+1]?";
 				                                            purple++;
 				                                        }
 				                                        else
 				                                        {
-				                                            richTextBox2.Text = "";
-				                                            listbut[list[indexstep].para3].BackColor = Color.Green;
-				                                            listbut[list[indexstep].Xright].BackColor = Color.Green;
+				                                            //richTextBox2.Text = "";
+				                                            listbut[list.get(indexstep).para3].setBackground(Color.green);
+				                                            listbut[list.get(indexstep).Xright].setBackground(Color.green);
 				                                            if (green < 40)
 				                                                green++;
 				                                            else
 				                                            {
-				                                                listbut[list[indexstep].para3].BackColor = color;
-				                                                listbut[list[indexstep].Xright].BackColor = color;
-				                                                green = red = 0;
+				                                                listbut[list.get(indexstep).para3].setBackground(color);
+				                                                listbut[list.get(indexstep).Xright].setBackground(color);
+				                                                green = orange = 0;
 				                                                start_khoi_tao = 0;
 				                                                indexstep++;
 				                                                purple = 0;
@@ -1680,35 +1682,35 @@ public class Form1 extends JFrame {
 				                            }
 				                            else
 				                            {
-				                                if (list[indexstep].check == 4)
+				                                if (list.get(indexstep).check == 4)
 				                                {
-				                                    if (list[indexstep].para1 == 1)
+				                                    if (list.get(indexstep).para1 == 1)
 				                                    {
-				                                        richTextBox2.Text = "left=k;";
-				                                        if (list[indexstep].index1 > 0)
+				                                       // richTextBox2.Text = "left=k;";
+				                                        if (list.get(indexstep).index1 > 0)
 				                                        {
-				                                            for (int i = 0; i < list[indexstep].index1; i++)
+				                                            for (int i = 0; i < list.get(indexstep).index1; i++)
 				                                            {
-				                                                listbut[i].BackColor = Color.Orange;
+				                                                listbut[i].setBackground(Color.orange);
 				                                            }
 				                                        }
-				                                        label12.Visible = false;
-				                                        label14.Location = new Point(xpos[list[indexstep].Xleft] + 32, 535);
+				                                        labelArrowL.setVisible(false);
+				                                        labelleft.setLocation(xpos[list.get(indexstep).Xleft] + 32, 535);
 				                                    }
 				                                    else
 				                                    {
-				                                        richTextBox2.Text = "right=k;";
-				                                        if (list[indexstep].index2 < t.Length - 1)
+				                                        //richTextBox2.Text = "right=k;";
+				                                        if (list.get(indexstep).index2 < arr.length - 1)
 				                                        {
-				                                            for (int i = t.Length - 1; i > list[indexstep].index2; i--)
+				                                            for (int i = arr.length - 1; i > list.get(indexstep).index2; i--)
 				                                            {
-				                                                listbut[i].BackColor = Color.Orange;
+				                                                listbut[i].setBackground(Color.orange);
 				                                            }
 				                                        }
-				                                        label11.Visible = false;
-				                                        label16.Location = new Point(xpos[list[indexstep].Xleft] + 30, 562);
+				                                        labelArrowR.setVisible(false);
+				                                        labelright.setLocation(xpos[list.get(indexstep).Xleft] + 30, 562);
 				                                    }
-				                                    label18.Visible = false;
+				                                    labelj.setVisible(false);
 				                                    if (green < 40)
 				                                    {
 				                                        green++;
@@ -1722,17 +1724,19 @@ public class Form1 extends JFrame {
 				                                }
 				                                else
 				                                {
-				                                    if (list[indexstep].check == 3)
+				                                    if (list.get(indexstep).check == 3)
 				                                    {
-				                                        richTextBox2.Text = "left>=right: Thoát vòng lặp";
-				                                        label11.Visible = label12.Visible = false;
-				                                        label14.ForeColor = label16.ForeColor = Color.Red;
-				                                        label18.Visible = false;
-				                                        if (red < 50)
-				                                            red++;
+				                                      //  richTextBox2.Text = "left>=right: Thoát vòng lặp";
+				                                        labelArrowL.setVisible(false);
+				                                        labelArrowR.setVisible(false);
+				                                        labelleft.setForeground(Color.red);
+				                                        labelright.setForeground(Color.red);;
+				                                        labelj.setVisible(false);
+				                                        if (orange < 50)
+				                                            orange++;
 				                                        else
 				                                        {
-				                                            red = start_khoi_tao = 0;
+				                                            orange = start_khoi_tao = 0;
 				                                            indexstep++;
 				                                        }
 				                                    }
@@ -1743,23 +1747,26 @@ public class Form1 extends JFrame {
 				                }
 				                else
 				                {
-				                    button4.Visible = false;
-				                    button4.Text = "Chạy";
+				                	buttonStop.setVisible(false);
+			                        buttonTiepTuc.setVisible(false);
 				                    indexstep = 0;
-				                    button5.Visible = false;
 				                    start = 0;
 				                    yellow = 0;
-				                    label17.Visible = label18.Visible = label19.Visible = label14.Visible = label16.Visible = label25.Visible = false;
-				                    label14.ForeColor = Color.Fuchsia;
-				                    label16.ForeColor = Color.Blue;
-				                    textBox6.Text = "";
-				                    textBox7.Text = "";
-				                    richTextBox2.Text = "";
-				                    for (int i = 0; i < listbut.Length; i++)
+				                    labeli.setVisible(false);
+                                    labelj.setVisible(false);
+                                    labelleft.setVisible(false);
+                                    labelright.setVisible(false);
+                                    labelk.setVisible(false);
+                                    labelleft.setForeground(Color.black);
+				                    labelright.setForeground(Color.black);
+				                 //   textBox6.Text = "";
+				                   // textBox7.Text = "";
+				                 //   richTextBox2.Text = "";
+				                    for (int i = 0; i < listbut.length; i++)
 				                    {
-				                        listbut[i].BackColor = color;
+				                        listbut[i].setBackground(color);
 				                    }
-				                    timer.Stop();
+				                    timer.stop();
 				                }
 				            }
 						}
@@ -1771,11 +1778,29 @@ public class Form1 extends JFrame {
 					if(radiobuttonTangDan.isSelected())
 					{
 						tang_giam=1;
+						CodeRdS(tang_giam);
+						radixsort(arr, arr.length, listbut, 1);
 					}
 					else
 					{
-						tang_giam=0;
+						tang_giam=0;	
+						CodeRdS(tang_giam);
+						radixsort(arr, arr.length, listbut, 1);
 					}
+					buttonStart.setVisible(false);
+					buttonStop.setVisible(true);
+					thuattoan=new JList<>(model);
+					thuattoan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					thuattoan.setFont(new Font("Monospaced",Font.BOLD,14));
+					scrollPane.setViewportView(thuattoan);
+					timer= new Timer(10, new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
 				}
 			}
 		});
@@ -1908,8 +1933,57 @@ public class Form1 extends JFrame {
 		labelhigh.setVisible(false);
 		contentPane.add(labelhigh);
 		
+		labelleft = new JLabel("left");
+		labelleft.setFont(new Font("Tahoma", Font.BOLD, 16));
+		labelleft.setBounds(153, 313, 46, 14);
+		labelleft.setVisible(false);
+		contentPane.add(labelleft);
+		
+		labelright = new JLabel("right");
+		labelright.setFont(new Font("Tahoma", Font.BOLD, 16));
+		labelright.setBounds(226, 315, 46, 19);
+		labelright.setVisible(false);
+		contentPane.add(labelright);
+		
+		labeldonvi = new JLabel("labeldonvi");
+		labeldonvi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		labeldonvi.setBounds(33, 197, 74, 23);
+		labeldonvi.setVisible(false);
+		contentPane.add(labeldonvi);
+		
 		
 	}
+	public void changelabelRS1(int pos, int val)
+    {
+        labelindex1[pos].setText(Integer.toString(val));
+        labelindex1[pos].setVisible(true);
+    }
+	public void changelabelRS(int pos)
+    {
+        if (pos == 1)
+            labeldonvi.setText("Đơn vị");
+        if (pos == 10)
+            labeldonvi.setText("Chục");
+        if (pos == 100)
+            labeldonvi.setText("Trăm");
+        if (pos == 1000)
+            labeldonvi.setText("Nghìn");
+        for (int i = 0; i < labelindex.length; i++)
+        {
+            labelindex[i].setText(Integer.toString((Integer.parseInt(listbut[i].getText()) / pos) % 10));
+        }
+    }
+	private void ChangeColorRS(int x)
+    {
+        for (int i = 0; i < listbut.length; i++)
+        {
+            if (Integer.parseInt(listbut[i].getText()) == x && listbut[i].getBackground() == color)
+            {
+                listbut[i].setBackground(Color.orange);
+                i = 10;
+            }
+        }
+    }
 	public void xuLyChuoi(String s)
 	{
 		contentPane.setLayout(null);
