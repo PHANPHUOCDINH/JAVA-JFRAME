@@ -67,7 +67,7 @@ public class Form1 extends JFrame {
 	private ButtonGroup buttonGroup1,buttonGroup2,buttonGroup3;
 	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[];
 	private JComboBox comboBoxFile,comboBoxRandom;
-	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labelindex1[],labeli,labelk,labelj,labelLink,labelmin,labelpos,labelArrowR,labelx,labelArrowL,labelleft,labelright,labeldonvi;
+	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labelindex1[],labelindex2[],labeli,labelk,labelj,labelLink,labelmin,labelpos,labelArrowR,labelx,labelArrowL,labelleft,labelright,labeldonvi;
 	private JTextField textSo,textRandom;
 	private int arr[],len,xpos[],tang_giam;
 	private Timer timer;
@@ -358,6 +358,8 @@ public class Form1 extends JFrame {
 				thuattoan=null;
 				listbut=null;
 				labelindex=null;
+				labelindex1=null;
+				labelindex2=null;
 				xpos=null;
 				textRandom.setText(null);
 				textSo.setText(null);
@@ -1798,9 +1800,151 @@ public class Form1 extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							
+							if (start_khoi_tao < 45)
+				                start_khoi_tao++;
+				            else
+				            {
+				                if (indexstep < list.size())
+				                {
+				                    if (list.get(indexstep).check == 0)
+				                    {
+				                        for(JLabel lab:labelindex)
+				                        {
+				                            lab.setVisible(false);
+				                        }
+				                        if (y2 < 460)
+				                        {
+				                            y2 += speed;
+				                            for (int i = 0; i < listbut.length; i++)
+				                            {
+				                                listbut[i].setLocation(listbut[i].getLocation().x, listbut[i].getLocation().y + speed);
+				                            }
+				                        }
+				                        else
+				                        {
+				                            y2 = 380;
+				                            indexstep++;
+				                            start_khoi_tao = 0;
+				                        }
+				                    }
+				                    else
+				                    {
+				                        if(list.get(indexstep).check==1)
+				                        {
+				                            for(JLabel lab:labelindex2)
+				                            {
+				                                lab.setVisible(false);
+				                            }
+				                            changelabelRS(list.get(indexstep).index2);
+				                            //string hang = list.get(indexstep).index2 == 1 ? "đơn vị" : list.get(indexstep).index2 == 10 ? "chục" : list.get(indexstep).index2 == 100 ? "trăm":"nghìn";
+				                           // richTextBox2.Text = "Phân loại theo hàng "+hang;
+				                            labeldonvi.setVisible(true);
+				                            for (int i=0;i<labelindex1.length;i++)
+				                            {
+				                                labelindex1[i].setVisible(true);
+				                            }
+				                            if (green < 35)
+				                                green++;
+				                            else
+				                            {
+				                                green = 0;
+				                                indexstep++;
+				                                start_khoi_tao = 0;
+				                                labelArrowR.setVisible(true);
+				                            }
+				                        }
+				                        else
+				                        {
+				                            if(list.get(indexstep).check==2)
+				                            {
+				                                ChangeColorRS(list.get(indexstep).index2);
+				                                if (yellow < 30)
+				                                    yellow++;
+				                                else
+				                                {
+				                                    changelabelRS2(list.get(indexstep).index1, list.get(indexstep).index2);
+				                                    indexstep++;
+				                                    yellow =start_khoi_tao= 0;
+				                                }
+				                            }
+				                            else
+				                            {
+				                                if(list.get(indexstep).check==3)
+				                                {
+				                                    for(JLabel lab:labelindex1)
+				                                    {
+				                                        lab.setVisible(false);
+				                                    }
+				                                    for(JButton but:listbut)
+				                                    {
+				                                        but.setBackground(color);
+				                                    }
+				                                    if (yellow < 25)
+				                                        yellow++;
+				                                    else
+				                                    {
+				                                        for(int i=0;i<arr.length;i++)
+				                                        {
+				                                            listbut[i].setText(labelindex2[i].getText());
+				                                        }
+				                                        yellow = start_khoi_tao = 0;
+				                                        indexstep++;
+				                                    }
+				                                }
+				                                else
+				                                {
+				                                    if(list.get(indexstep).check==4)
+				                                    {
+				                                        for(JLabel lab: labelindex2)
+				                                        {
+				                                            lab.setVisible(false);
+				                                        }
+				                                        labeldonvi.setVisible(false);
+				                                        labelArrowR.setVisible(false);
+				                                        if (y1 >380)
+				                                        {
+				                                            y1 -= speed;
+				                                            for (int i = 0; i < listbut.length; i++)
+				                                            {
+				                                                listbut[i].setLocation(listbut[i].getLocation().x, listbut[i].getLocation().y - speed);
+				                                            }
+				                                        }
+				                                        else
+				                                        {
+				                                            y1 = 460;
+				                                            for (JLabel lab:labelindex1)
+				                                            {
+				                                                lab.setVisible(true);
+				                                            }
+				                                            indexstep++;
+				                                            start_khoi_tao = 0;
+				                                        }
+				                                    }
+				                                }
+				                            }
+				                        }
+				                    }
+				                }
+				                else
+				                {
+				                    labelArrowR.setVisible(false);
+				                    labeldonvi.setVisible(false);
+				                    buttonStop.setVisible(false);
+			                        buttonTiepTuc.setVisible(false);
+				                    indexstep = 0;
+				                    start = 0;
+				                    yellow = 0;
+				                  //  textBox6.Text = "";
+				                   // textBox7.Text = "";
+				                    //label17.Visible = false;
+				                   // label18.Visible = false;
+				                   // richTextBox2.Clear();
+				                    timer.stop();
+				                }
+				            }
 						}
 					});
+					timer.start();
 				}
 			}
 		});
@@ -1946,17 +2090,17 @@ public class Form1 extends JFrame {
 		contentPane.add(labelright);
 		
 		labeldonvi = new JLabel("labeldonvi");
-		labeldonvi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labeldonvi.setBounds(33, 197, 74, 23);
+		labeldonvi.setFont(new Font("Tahoma", Font.BOLD, 15));
+		labeldonvi.setBounds(10, 484, 91, 23);
 		labeldonvi.setVisible(false);
 		contentPane.add(labeldonvi);
 		
 		
 	}
-	public void changelabelRS1(int pos, int val)
+	public void changelabelRS2(int pos, int val)
     {
-        labelindex1[pos].setText(Integer.toString(val));
-        labelindex1[pos].setVisible(true);
+        labelindex2[pos].setText(Integer.toString(val));
+        labelindex2[pos].setVisible(true);
     }
 	public void changelabelRS(int pos)
     {
@@ -1970,8 +2114,27 @@ public class Form1 extends JFrame {
             labeldonvi.setText("Nghìn");
         for (int i = 0; i < labelindex.length; i++)
         {
-            labelindex[i].setText(Integer.toString((Integer.parseInt(listbut[i].getText()) / pos) % 10));
+            labelindex1[i].setText(Integer.toString((Integer.parseInt(listbut[i].getText()) / pos) % 10));
         }
+    }
+	public void addlabelRS()
+    {
+		labelindex1= new JLabel[len];
+		labelindex2=new JLabel[len];
+        for (int i = 0; i < listbut.length; i++)
+        {
+        	labelindex1[i]= new JLabel(String.valueOf(i));
+			labelindex1[i].setBounds(100*i+76,520,30,30);
+			labelindex1[i].setFont(new Font("Tahoma", Font.PLAIN, 15));
+			labelindex1[i].setVisible(false);
+			contentPane.add(labelindex1[i]);
+			labelindex2[i]= new JLabel(String.valueOf(i));
+			labelindex2[i].setBounds(100*i+76,470,30,30);
+			labelindex2[i].setFont(new Font("Tahoma", Font.PLAIN, 15));
+			labelindex2[i].setVisible(false);
+			contentPane.add(labelindex2[i]);
+        }
+        repaint();
     }
 	private void ChangeColorRS(int x)
     {
