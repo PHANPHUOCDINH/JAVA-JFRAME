@@ -39,6 +39,7 @@ import java.util.Scanner;
 
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -57,19 +58,21 @@ import javax.swing.event.MenuListener;
 import javax.swing.event.MenuEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class Form1 extends JFrame {
 	private JPanel contentPane,panelThuatToan,panelChieuSapXep;
 	private JMenuBar menuBar;
 	private JMenu menuCaiDat,menuGioiThieu;
 	private JMenuItem chonMau;
-	private JRadioButton radioButtonNhap,radioButtonRandom,radiobuttonIS,radiobuttonQS,radiobuttonSS,radiobuttonShS,radiobuttonBS,radiobuttonRdS,radiobuttonInsS,radioButton7,radiobuttonGiamDan,radiobuttonTangDan;
+	private JRadioButton radioButtonNhap,radioButtonRandom,radiobuttonIS,radiobuttonQS,radiobuttonSS,radiobuttonShS,radiobuttonBS,radiobuttonRdS,radiobuttonInsS,radiobuttonBiSrch,radiobuttonGiamDan,radiobuttonTangDan;
 	private ButtonGroup buttonGroup1,buttonGroup2,buttonGroup3;
-	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[];
+	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[],buttonnumsrch;
 	private JComboBox comboBoxFile,comboBoxRandom;
 	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labelindex1[],labelindex2[],labeli,labelk,labelj,labelLink,labelmin,labelpos,labelArrowR,labelx,labelArrowL,labelleft,labelright,labeldonvi;
 	private JTextField textSo,textRandom;
-	private int arr[],len,xpos[],tang_giam;
+	private int arr[],len,xpos[],tang_giam,numsrch;
 	private Timer timer;
 	private JButton buttonStop;
 	private Color color=Color.white;
@@ -81,6 +84,8 @@ public class Form1 extends JFrame {
 	private JLabel labelpivot;
 	private JLabel labellow;
 	private JLabel labelhigh;
+	private ActionListener a;
+	private JRadioButton radiobuttonLiSrch;
 	/**
 	 * Launch the application.
 	 */
@@ -102,6 +107,24 @@ public class Form1 extends JFrame {
 	 * Create the frame.
 	 */
 	public Form1() {
+		a= new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				AbstractButton ab= (AbstractButton) arg0.getSource();
+				if(ab.getText().equals("Binary Search")||ab.getText().equals("Linear Search"))
+				{
+					panelChieuSapXep.setVisible(false);
+				}
+				else
+				{
+					panelChieuSapXep.setVisible(true);;
+				}
+				}
+			
+		};
+				
 		setBounds(100, 100, 1376, 742);
 		setLocation(new Point(0,0));
 		setTitle("Mô phỏng thuật toán sắp xếp");
@@ -236,7 +259,7 @@ public class Form1 extends JFrame {
 		contentPane.add(textRandom);
 		
 		panelThuatToan = new JPanel();
-		panelThuatToan.setBounds(545, 11, 320, 177);
+		panelThuatToan.setBounds(545, 11, 320, 223);
 		panelThuatToan.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Ch\u1ECDn Thu\u1EADt To\u00E1n", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panelThuatToan.setToolTipText("");
 		contentPane.add(panelThuatToan);
@@ -246,42 +269,56 @@ public class Form1 extends JFrame {
 		radiobuttonIS.setSelected(true);
 		radiobuttonIS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonIS.setBounds(6, 19, 135, 23);
+		radiobuttonIS.addActionListener(a);
 		panelThuatToan.add(radiobuttonIS);
 		
 		radiobuttonQS = new JRadioButton("Quick Sort");
 		radiobuttonQS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonQS.setBounds(161, 19, 135, 23);
+		radiobuttonQS.addActionListener(a);
 		panelThuatToan.add(radiobuttonQS);
 		
 		radiobuttonSS = new JRadioButton("Selection Sort");
 		radiobuttonSS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonSS.setBounds(6, 62, 135, 23);
+		radiobuttonSS.addActionListener(a);
 		panelThuatToan.add(radiobuttonSS);
 		
 		radiobuttonShS = new JRadioButton("Shaker Sort");
 		radiobuttonShS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonShS.setBounds(161, 62, 135, 23);
+		radiobuttonShS.addActionListener(a);
 		panelThuatToan.add(radiobuttonShS);
 		
 		radiobuttonBS = new JRadioButton("Bubble Sort");
 		radiobuttonBS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonBS.setBounds(6, 107, 135, 23);
+		radiobuttonBS.addActionListener(a);
 		panelThuatToan.add(radiobuttonBS);
 		
 		radiobuttonRdS = new JRadioButton("Radix Sort");
 		radiobuttonRdS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonRdS.setBounds(161, 107, 135, 23);
+		radiobuttonRdS.addActionListener(a);
 		panelThuatToan.add(radiobuttonRdS);
 		
 		radiobuttonInsS = new JRadioButton("Insertion Sort");
 		radiobuttonInsS.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		radiobuttonInsS.setBounds(6, 147, 135, 23);
+		radiobuttonInsS.addActionListener(a);
 		panelThuatToan.add(radiobuttonInsS);
 		
-		radioButton7 = new JRadioButton("Selection Sort");
-		radioButton7.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		radioButton7.setBounds(161, 147, 135, 23);
-		panelThuatToan.add(radioButton7);
+		radiobuttonBiSrch = new JRadioButton("Binary Search");
+		radiobuttonBiSrch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonBiSrch.setBounds(161, 147, 135, 23);
+		radiobuttonBiSrch.addActionListener(a);
+		panelThuatToan.add(radiobuttonBiSrch);
+		
+		radiobuttonLiSrch = new JRadioButton("Linear Search");
+		radiobuttonLiSrch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		radiobuttonLiSrch.setBounds(6, 187, 135, 23);
+		radiobuttonLiSrch.addActionListener(a);
+		panelThuatToan.add(radiobuttonLiSrch);
 		
 		buttonGroup2= new ButtonGroup();
 		buttonGroup2.add(radiobuttonIS);
@@ -291,7 +328,11 @@ public class Form1 extends JFrame {
 		buttonGroup2.add(radiobuttonBS);
 		buttonGroup2.add(radiobuttonRdS);
 		buttonGroup2.add(radiobuttonInsS);
-		buttonGroup2.add(radioButton7);
+		buttonGroup2.add(radiobuttonBiSrch);
+		buttonGroup2.add(radiobuttonLiSrch);
+		
+		
+				
 		
 		labelCode = new JLabel("Code thực thi thuật toán");
 		labelCode.setBounds(1042, 6, 172, 21);
@@ -354,6 +395,20 @@ public class Form1 extends JFrame {
 				{
 					contentPane.remove(l);
 				}
+				if(labelindex1!=null)
+				{
+				for(JLabel l:labelindex1)
+				{
+					contentPane.remove(l);
+				}
+				}
+				if(labelindex2!=null)
+				{
+				for(JLabel l:labelindex2)
+				{
+					contentPane.remove(l);
+				}
+				}
 				model.removeAllElements();
 				thuattoan=null;
 				listbut=null;
@@ -377,8 +432,12 @@ public class Form1 extends JFrame {
 				labelhigh.setVisible(false);
 				labellow.setVisible(false);
 				labelpivot.setVisible(false);
+				labeldonvi.setVisible(false);
 			//	label
-				timer.stop();
+				if(timer!=null)
+					{
+					timer.stop();
+					}
 				repaint();
 			}
 		});
@@ -1768,6 +1827,7 @@ public class Form1 extends JFrame {
 				                    {
 				                        listbut[i].setBackground(color);
 				                    }
+				                    JOptionPane.showMessageDialog(rootPane, "Mảng đã sắp xếp xong", "", JOptionPane.INFORMATION_MESSAGE);
 				                    timer.stop();
 				                }
 				            }
@@ -1795,6 +1855,7 @@ public class Form1 extends JFrame {
 					thuattoan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					thuattoan.setFont(new Font("Monospaced",Font.BOLD,14));
 					scrollPane.setViewportView(thuattoan);
+					addlabelRS();
 					timer= new Timer(10, new ActionListener() {
 						
 						@Override
@@ -1912,7 +1973,7 @@ public class Form1 extends JFrame {
 				                                        else
 				                                        {
 				                                            y1 = 460;
-				                                            for (JLabel lab:labelindex1)
+				                                            for (JLabel lab:labelindex)
 				                                            {
 				                                                lab.setVisible(true);
 				                                            }
@@ -1934,17 +1995,267 @@ public class Form1 extends JFrame {
 				                    indexstep = 0;
 				                    start = 0;
 				                    yellow = 0;
-				                  //  textBox6.Text = "";
-				                   // textBox7.Text = "";
-				                    //label17.Visible = false;
-				                   // label18.Visible = false;
-				                   // richTextBox2.Clear();
+				                    JOptionPane.showMessageDialog(rootPane, "Mảng đã sắp xếp xong", "", JOptionPane.INFORMATION_MESSAGE);
 				                    timer.stop();
 				                }
 				            }
 						}
 					});
 					timer.start();
+				}
+				if(radiobuttonBiSrch.isSelected())
+				{
+					if(checkTangDan())
+					{
+					try {
+					numsrch=Integer.parseInt(JOptionPane.showInputDialog(contentPane, "Nhập số tìm kiếm"));
+					}catch(Exception ex)
+					{
+						JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập số", "", JOptionPane.ERROR_MESSAGE);
+					}
+					int left, right, mid;
+                    left = 0;
+                    right = arr.length - 1;
+                    do
+                    {
+                        mid = (left + right) / 2;
+                        if (arr[mid] == numsrch)
+                        {
+                            list.add(new Step(left, mid, right, 1,-1,-1,-1,-1,null));
+                            left = 1;
+                            right = 0;
+                        }
+                        else
+                        {
+                            list.add(new Step(left, mid, right, 0,-1,-1,-1,-1,null));
+                            if (arr[mid] < numsrch)
+                            {
+                                //    list.Add(new Step(left, mid,right, 0));
+                                left = mid + 1;
+                            }
+                            else
+                            {
+                                //   list.Add(new Step(left,mid,right, 0));
+                                right = mid - 1;
+
+                            }
+
+                        }
+                    } while (left <= right);
+                    CodeBiS();
+                    buttonStart.setVisible(false);
+					buttonStop.setVisible(true);
+					thuattoan=new JList<>(model);
+					thuattoan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					thuattoan.setSelectedIndex(0);
+					thuattoan.setFont(new Font("Monospaced",Font.BOLD,14));
+					scrollPane.setViewportView(thuattoan);
+					timer= new Timer(10, new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							if (start_khoi_tao < 40)
+				            {
+				            //    richTextBox2.Text = "int left, right, mid; \nleft=0;\nright=n-1;";
+				                start_khoi_tao++;
+				            }
+				            else
+				            {
+				                if (start < 80)
+				                    start++;
+				                else
+				                {
+				                    if (indexstep < list.size())
+				                    {
+				                        if (label14_16 < 60)
+				                            label14_16++;
+				                        else
+				                        {
+				                            label14.Location = new Point(listbut[list[indexstep].index1].Location.X + 33, listbut[list[indexstep].index1].Location.Y + 55);
+				                            label15.Location = new Point(listbut[list[indexstep].index2].Location.X + 33, listbut[list[indexstep].index2].Location.Y + 72);
+				                            label16.Location = new Point(listbut[list[indexstep].Xleft].Location.X + 33, listbut[list[indexstep].Xleft].Location.Y + 89);
+				                            label14.Visible = true;
+				                            label15.Visible = true;
+				                            label16.Visible = true;
+				                            listbut[list[indexstep].index1].BackColor = Color.MediumPurple;
+				                            listbut[list[indexstep].Xleft].BackColor = Color.MediumPurple;
+				                            listbut[list[indexstep].index2].BackColor = Color.Yellow;
+				                            if (yellow < 80)
+				                            {
+				                                button8.BackColor = Color.Yellow;
+				                                richTextBox2.Text = "(a[mid]==x)?";
+				                                yellow++;
+				                            }
+				                            else
+				                            {
+				                                if (list[indexstep].Xright == 1)
+				                                {
+				                                    listbut[list[indexstep].index1].BackColor = color;
+				                                    listbut[list[indexstep].Xleft].BackColor = color;
+				                                    listbut[list[indexstep].index2].BackColor = Color.Green;
+				                                    if (green < 80)
+				                                    {
+				                                        richTextBox2.Text = "return 1;";
+				                                        green++;
+				                                    }
+				                                    else
+				                                    {
+				                                        button8.Visible = false;
+				                                        button8.BackColor = color;
+				                                        label13.Text = "Tìm thấy !!!";
+				                                        label13.ForeColor = Color.Green;
+				                                        label13.Visible = true;
+				                                        button5.Visible = false;
+				                                        richTextBox2.Text = "";
+				                                        timer.Stop();
+				                                    }
+				                                }
+				                                else
+				                                {
+				                                    listbut[list[indexstep].index2].BackColor = Color.Red;
+				                                    if (green < 80)
+				                                    {
+				                                        richTextBox2.Text = "if(a[mid]<x) left=mid+1;\nelse if(a[mid]>x) right=mid-1;";
+				                                        green++;
+				                                    }
+				                                    else
+				                                    {
+				                                        label14.Visible = false;
+				                                        label15.Visible = false;
+				                                        label16.Visible = false;
+				                                        listbut[list[indexstep].index1].BackColor = color;
+				                                        listbut[list[indexstep].Xleft].BackColor = color;
+				                                        listbut[list[indexstep].index2].BackColor = color;
+				                                        start = 0;
+				                                        yellow = 0;
+				                                        green = 0;
+				                                        indexstep++;
+				                                        button8.BackColor = color;
+				                                    }
+				                                }
+				                            }
+				                        }
+				                    }
+				                    else
+				                    {
+				                        button8.Visible = false;
+				                        button8.BackColor = color;
+				                        label13.Text = "Không tìm thấy !!!";
+				                        label13.ForeColor = Color.Red;
+				                        label13.Visible = true;
+				                        button5.Visible = false;
+				                        richTextBox2.Text = "";
+				                        timer.Stop();
+				                    }
+				                }
+				            }
+						}
+					});
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(contentPane, "Vui lòng chọn Tạo lại để nhập dãy số tăng dần", "", JOptionPane.INFORMATION_MESSAGE);
+						buttonTaoLai.doClick();
+					}
+				}
+				if(radiobuttonLiSrch.isSelected())
+				{
+					try {
+						numsrch=Integer.parseInt(JOptionPane.showInputDialog(contentPane, "Nhập số tìm kiếm"));
+						}catch(Exception ex)
+						{
+							JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập số", "", JOptionPane.ERROR_MESSAGE);
+						}
+					 for (int i = 0; i < arr.length; i++)
+                     {
+                         if (arr[i] == numsrch)
+                             list.add(new Step(i, -1, -1, -1, 1,-1,-1,-1,null));
+                         else
+                             list.add(new Step(i, -1, -1, -1, 0,-1,-1,-1,null));
+                     }
+					CodeLiS();
+	                buttonStart.setVisible(false);
+					buttonStop.setVisible(true);
+					thuattoan=new JList<>(model);
+					thuattoan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					thuattoan.setSelectedIndex(0);
+					thuattoan.setFont(new Font("Monospaced",Font.BOLD,14));
+					scrollPane.setViewportView(thuattoan);
+					timer= new Timer(10, new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							if (start < 55)
+				            {
+				                richTextBox2.Text = "for(int i=0;i<N;i++)";
+				                start++;
+				            }
+				            else
+				            {
+				                if (indexstep < list.Count)
+				                {
+				                    label17.Location = new Point(xpos[list[indexstep].index1] + 41, 535);
+				                    label17.Visible = true;
+				                    listbut[list[indexstep].index1].BackColor = Color.Yellow;
+				                    button8.BackColor = Color.Yellow;
+				                    if (yellow < 80)
+				                    {
+				                        richTextBox2.Text = "if(a[i]==x)";
+				                        yellow++;
+				                    }
+				                    else
+				                    {
+				                        if (list[indexstep].check == 0)
+				                        {
+				                            listbut[list[indexstep].index1].BackColor = Color.Red;
+
+				                            if (red < 80)
+				                                red++;
+				                            else
+				                            {
+				                                red = start = yellow = 0;
+				                                listbut[list[indexstep].index1].BackColor = color;
+				                                button8.BackColor = color;
+				                                indexstep++;
+				                            }
+				                        }
+				                        else
+				                        {
+				                            listbut[list[indexstep].index1].BackColor = Color.Green;
+				                            if (green < 80)
+				                                green++;
+				                            else
+				                            {
+				                                button8.Visible = false;
+				                                button8.BackColor = color;
+				                                label13.Visible = true;
+				                                label13.Text = "Tìm thấy !!!";
+				                                label13.ForeColor = Color.Green;
+				                                label17.Visible = false;
+				                                button5.Visible = false;
+				                                richTextBox2.Text = "";
+				                                timer.Stop();
+				                            }
+				                        }
+				                    }
+				                }
+				                else
+				                {
+				                    button8.Visible = false;
+				                    button8.BackColor = color;
+				                    label13.Visible = true;
+				                    label13.Text = "Không tìm thấy !!!";
+				                    label13.ForeColor = Color.Red;
+				                    label17.Visible = false;
+				                    button5.Visible = false;
+				                    richTextBox2.Text = "";
+				                    timer.Stop();
+				                }
+				            }
+						}
+					});
 				}
 			}
 		});
@@ -1968,7 +2279,7 @@ public class Form1 extends JFrame {
 		
 		panelChieuSapXep = new JPanel();
 		panelChieuSapXep.setBorder(new TitledBorder(null, "S\u1EAFp x\u1EBFp theo", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
-		panelChieuSapXep.setBounds(545, 190, 320, 70);
+		panelChieuSapXep.setBounds(545, 239, 320, 70);
 		contentPane.add(panelChieuSapXep);
 		panelChieuSapXep.setLayout(null);
 		
@@ -2030,7 +2341,7 @@ public class Form1 extends JFrame {
 //		});
 		labelLink.setForeground(Color.BLUE);
 		labelLink.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelLink.setBounds(559, 659, 230, 21);
+		labelLink.setBounds(557, 603, 230, 21);
 		labelLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labelLink.setVisible(false);
 		contentPane.add(labelLink);
@@ -2049,7 +2360,7 @@ public class Form1 extends JFrame {
 		
 		labelArrowR = new JLabel("→");
 		labelArrowR.setFont(new Font("Tahoma", Font.BOLD, 30));
-		labelArrowR.setBounds(27, 326, 41, 21);
+		labelArrowR.setBounds(10, 431, 41, 21);
 		labelArrowR.setVisible(false);
 		contentPane.add(labelArrowR);
 		
@@ -2091,7 +2402,7 @@ public class Form1 extends JFrame {
 		
 		labeldonvi = new JLabel("labeldonvi");
 		labeldonvi.setFont(new Font("Tahoma", Font.BOLD, 15));
-		labeldonvi.setBounds(10, 484, 91, 23);
+		labeldonvi.setBounds(1, 484, 91, 23);
 		labeldonvi.setVisible(false);
 		contentPane.add(labeldonvi);
 		
@@ -2124,12 +2435,12 @@ public class Form1 extends JFrame {
         for (int i = 0; i < listbut.length; i++)
         {
         	labelindex1[i]= new JLabel(String.valueOf(i));
-			labelindex1[i].setBounds(100*i+76,520,30,30);
+			labelindex1[i].setBounds(100*i+76,481,30,30);
 			labelindex1[i].setFont(new Font("Tahoma", Font.PLAIN, 15));
 			labelindex1[i].setVisible(false);
 			contentPane.add(labelindex1[i]);
 			labelindex2[i]= new JLabel(String.valueOf(i));
-			labelindex2[i].setBounds(100*i+76,470,30,30);
+			labelindex2[i].setBounds(100*i+76,430,30,30);
 			labelindex2[i].setFont(new Font("Tahoma", Font.PLAIN, 15));
 			labelindex2[i].setVisible(false);
 			contentPane.add(labelindex2[i]);
@@ -2143,7 +2454,7 @@ public class Form1 extends JFrame {
             if (Integer.parseInt(listbut[i].getText()) == x && listbut[i].getBackground() == color)
             {
                 listbut[i].setBackground(Color.orange);
-                i = 10;
+                i = 14;
             }
         }
     }
@@ -2324,6 +2635,15 @@ public class Form1 extends JFrame {
          }
          addstepRS(-1, -1, -1, -1, 3, null);
      }
+	public boolean checkTangDan()
+	{
+		for(int i=0;i<len-1;i++)
+		{
+			if(arr[i]>arr[i+1])
+				return false;
+		}
+		return true;
+	}
 	public void CodeIS(int check)
     {
         model.addElement("for (int i = 0 ; i < N-1 ; i++)");
@@ -2505,5 +2825,23 @@ public class Form1 extends JFrame {
         model.addElement("            a[i] = output[i];");
         model.addElement("      }");
         model.addElement("}");
+	}
+	public void CodeBiS()
+	{
+		model.addElement("int left, right, mid; left=0; right=N-1;");
+        model.addElement("do{ ");
+        model.addElement("           mid=(left+right)/2;");
+        model.addElement("           if(a[mid]==x) return 1;");
+        model.addElement("           else if(a[mid]<x) left=mid+1;");
+        model.addElement("                      else if(a[mid]>x) right=mid-1;");
+        model.addElement("}while(left<=right);");
+        model.addElement("return 0;");
+	}
+	public void CodeLiS()
+	{
+		 model.addElement("for (int i = 0 ; i < N-1 ; i++)");
+         model.addElement("        if(a[i]==search");
+         model.addElement("           return 1;");
+         model.addElement("return 0;");
 	}
 }
