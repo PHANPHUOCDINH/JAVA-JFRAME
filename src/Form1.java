@@ -70,7 +70,7 @@ public class Form1 extends JFrame {
 	private ButtonGroup buttonGroup1,buttonGroup2,buttonGroup3;
 	private JButton btnChonFile,buttonRandom,buttonTaoNut,buttonTiepTuc,buttonTaoLai,buttonStart,listbut[],buttonnumsrch;
 	private JComboBox comboBoxFile,comboBoxRandom;
-	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labelindex1[],labelindex2[],labeli,labelk,labelj,labelLink,labelmin,labelpos,labelArrowR,labelx,labelArrowL,labelleft,labelright,labeldonvi;
+	private JLabel labelNhapSo,labelRandom,labelRandom1,labelCode,labelindex[],labelindex1[],labelindex2[],labeli,labelk,labelj,labelLink,labelmin,labelpos,labelArrowR,labelx,labelArrowL,labelleft,labelright,labeldonvi,labelmid;
 	private JTextField textSo,textRandom;
 	private int arr[],len,xpos[],tang_giam,numsrch;
 	private Timer timer;
@@ -86,6 +86,8 @@ public class Form1 extends JFrame {
 	private JLabel labelhigh;
 	private ActionListener a;
 	private JRadioButton radiobuttonLiSrch;
+	private JTextArea textareayTuong;
+	private JLabel labelyTuong;
 	/**
 	 * Launch the application.
 	 */
@@ -163,6 +165,7 @@ public class Form1 extends JFrame {
 		contentPane.add(radioButtonNhap);
 		
 		radioButtonRandom = new JRadioButton("Random");
+		radioButtonRandom.setSelected(true);
 		radioButtonRandom.setBounds(33, 124, 87, 23);
 		radioButtonRandom.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(radioButtonRandom);
@@ -253,6 +256,7 @@ public class Form1 extends JFrame {
 		contentPane.add(labelRandom1);
 		
 		textRandom = new JTextField();
+		textRandom.setEditable(false);
 		textRandom.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textRandom.setBounds(268, 158, 251, 29);
 		textRandom.setColumns(10);
@@ -418,6 +422,7 @@ public class Form1 extends JFrame {
 				xpos=null;
 				textRandom.setText(null);
 				textSo.setText(null);
+				buttonnumsrch.setVisible(false);
 				buttonStart.setVisible(false);
 				buttonTaoLai.setVisible(false);
 				buttonStop.setVisible(false);
@@ -2042,6 +2047,8 @@ public class Form1 extends JFrame {
 
                         }
                     } while (left <= right);
+                    buttonnumsrch.setText(Integer.toString(numsrch));
+                    buttonnumsrch.setVisible(true);
                     CodeBiS();
                     buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
@@ -2062,76 +2069,75 @@ public class Form1 extends JFrame {
 				            }
 				            else
 				            {
-				                if (start < 80)
+				                if (start < 40)
 				                    start++;
 				                else
 				                {
 				                    if (indexstep < list.size())
 				                    {
-				                        if (label14_16 < 60)
-				                            label14_16++;
+				                        if (orange < 60)
+				                            orange++;
 				                        else
 				                        {
-				                            label14.Location = new Point(listbut[list[indexstep].index1].Location.X + 33, listbut[list[indexstep].index1].Location.Y + 55);
-				                            label15.Location = new Point(listbut[list[indexstep].index2].Location.X + 33, listbut[list[indexstep].index2].Location.Y + 72);
-				                            label16.Location = new Point(listbut[list[indexstep].Xleft].Location.X + 33, listbut[list[indexstep].Xleft].Location.Y + 89);
-				                            label14.Visible = true;
-				                            label15.Visible = true;
-				                            label16.Visible = true;
-				                            listbut[list[indexstep].index1].BackColor = Color.MediumPurple;
-				                            listbut[list[indexstep].Xleft].BackColor = Color.MediumPurple;
-				                            listbut[list[indexstep].index2].BackColor = Color.Yellow;
+				                            labelleft.setLocation(listbut[list.get(indexstep).index1].getLocation().x + 17, listbut[list.get(indexstep).index1].getLocation().y + 100);
+				                            labelmid.setLocation(listbut[list.get(indexstep).index2].getLocation().x + 15, listbut[list.get(indexstep).index2].getLocation().y + 130);
+				                            labelright.setLocation(listbut[list.get(indexstep).Xleft].getLocation().x + 13, listbut[list.get(indexstep).Xleft].getLocation().y + 160);
+				                            labelleft.setVisible(true);
+				                            labelmid.setVisible(true);
+				                            labelright.setVisible(true);
+				                            listbut[list.get(indexstep).index2].setBackground(Color.yellow);
 				                            if (yellow < 80)
 				                            {
-				                                button8.BackColor = Color.Yellow;
-				                                richTextBox2.Text = "(a[mid]==x)?";
+				                                buttonnumsrch.setBackground(Color.yellow);
+				                        //        richTextBox2.Text = "(a[mid]==x)?";
 				                                yellow++;
 				                            }
 				                            else
 				                            {
-				                                if (list[indexstep].Xright == 1)
+				                                if (list.get(indexstep).Xright == 1)
 				                                {
-				                                    listbut[list[indexstep].index1].BackColor = color;
-				                                    listbut[list[indexstep].Xleft].BackColor = color;
-				                                    listbut[list[indexstep].index2].BackColor = Color.Green;
+				                                    listbut[list.get(indexstep).index1].setBackground(color);
+				                                    listbut[list.get(indexstep).Xleft].setBackground(color);
+				                                    listbut[list.get(indexstep).index2].setBackground(Color.green);
 				                                    if (green < 80)
 				                                    {
-				                                        richTextBox2.Text = "return 1;";
+				                                        //richTextBox2.Text = "return 1;";
 				                                        green++;
 				                                    }
 				                                    else
 				                                    {
-				                                        button8.Visible = false;
-				                                        button8.BackColor = color;
-				                                        label13.Text = "Tìm thấy !!!";
-				                                        label13.ForeColor = Color.Green;
-				                                        label13.Visible = true;
-				                                        button5.Visible = false;
-				                                        richTextBox2.Text = "";
-				                                        timer.Stop();
+				                                        buttonnumsrch.setVisible(false);
+				                                        buttonnumsrch.setBackground(color);;
+				                                        //label13.Text = "Tìm thấy !!!";
+				                                        JOptionPane.showMessageDialog(rootPane, "Tìm thấy", "", JOptionPane.INFORMATION_MESSAGE);
+				                                        buttonnumsrch.setVisible(false);
+				                                        orange=0;
+				                                   //     richTextBox2.Text = "";
+				                                        timer.stop();
 				                                    }
 				                                }
 				                                else
 				                                {
-				                                    listbut[list[indexstep].index2].BackColor = Color.Red;
+				                                    listbut[list.get(indexstep).index2].setBackground(Color.red);;
 				                                    if (green < 80)
 				                                    {
-				                                        richTextBox2.Text = "if(a[mid]<x) left=mid+1;\nelse if(a[mid]>x) right=mid-1;";
+				                                      //  richTextBox2.Text = "if(a[mid]<x) left=mid+1;\nelse if(a[mid]>x) right=mid-1;";
 				                                        green++;
 				                                    }
 				                                    else
 				                                    {
-				                                        label14.Visible = false;
-				                                        label15.Visible = false;
-				                                        label16.Visible = false;
-				                                        listbut[list[indexstep].index1].BackColor = color;
-				                                        listbut[list[indexstep].Xleft].BackColor = color;
-				                                        listbut[list[indexstep].index2].BackColor = color;
+				                                        labelmid.setVisible(false);
+				                                        labelleft.setVisible(false);
+				                                        labelright.setVisible(false);
+				                                        listbut[list.get(indexstep).index1].setBackground(color);
+				                                        listbut[list.get(indexstep).Xleft].setBackground(color);
+				                                        listbut[list.get(indexstep).index2].setBackground(color);
 				                                        start = 0;
 				                                        yellow = 0;
 				                                        green = 0;
+				                                        orange=0;
 				                                        indexstep++;
-				                                        button8.BackColor = color;
+				                                        buttonnumsrch.setBackground(color);
 				                                    }
 				                                }
 				                            }
@@ -2139,19 +2145,24 @@ public class Form1 extends JFrame {
 				                    }
 				                    else
 				                    {
-				                        button8.Visible = false;
-				                        button8.BackColor = color;
-				                        label13.Text = "Không tìm thấy !!!";
-				                        label13.ForeColor = Color.Red;
-				                        label13.Visible = true;
-				                        button5.Visible = false;
-				                        richTextBox2.Text = "";
-				                        timer.Stop();
+				                        buttonnumsrch.setVisible(false);
+				                        buttonnumsrch.setBackground(color);;
+				           //             label13.Text = "Không tìm thấy !!!";
+				             //           label13.ForeColor = Color.Red;
+				               //         label13.Visible = true;
+				              //          button5.Visible = false;
+				                       // richTextBox2.Text = "";
+				                        buttonStop.setVisible(false);
+				                        buttonTiepTuc.setVisible(false);
+					                    indexstep = 0;
+					                    JOptionPane.showMessageDialog(contentPane, "Không tìm thấy", "", JOptionPane.INFORMATION_MESSAGE);
+				                        timer.stop();
 				                    }
 				                }
 				            }
 						}
 					});
+					timer.start();
 					}
 					else
 					{
@@ -2174,6 +2185,8 @@ public class Form1 extends JFrame {
                          else
                              list.add(new Step(i, -1, -1, -1, 0,-1,-1,-1,null));
                      }
+					buttonnumsrch.setText(Integer.toString(numsrch));
+	                buttonnumsrch.setVisible(true);
 					CodeLiS();
 	                buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
@@ -2189,73 +2202,74 @@ public class Form1 extends JFrame {
 							// TODO Auto-generated method stub
 							if (start < 55)
 				            {
-				                richTextBox2.Text = "for(int i=0;i<N;i++)";
+				          //      richTextBox2.Text = "for(int i=0;i<N;i++)";
 				                start++;
 				            }
 				            else
 				            {
-				                if (indexstep < list.Count)
+				                if (indexstep < list.size())
 				                {
-				                    label17.Location = new Point(xpos[list[indexstep].index1] + 41, 535);
-				                    label17.Visible = true;
-				                    listbut[list[indexstep].index1].BackColor = Color.Yellow;
-				                    button8.BackColor = Color.Yellow;
+				                    labeli.setLocation(xpos[list.get(indexstep).index1] + 27, 550);
+				                    labeli.setVisible(true);
+				                    listbut[list.get(indexstep).index1].setBackground(Color.yellow);
+				                    buttonnumsrch.setBackground(Color.yellow);
 				                    if (yellow < 80)
 				                    {
-				                        richTextBox2.Text = "if(a[i]==x)";
+				                  //      richTextBox2.Text = "if(a[i]==x)";
 				                        yellow++;
 				                    }
 				                    else
 				                    {
-				                        if (list[indexstep].check == 0)
+				                        if (list.get(indexstep).check == 0)
 				                        {
-				                            listbut[list[indexstep].index1].BackColor = Color.Red;
+				                            listbut[list.get(indexstep).index1].setBackground(Color.red);
 
-				                            if (red < 80)
-				                                red++;
+				                            if (orange < 80)
+				                                orange++;
 				                            else
 				                            {
-				                                red = start = yellow = 0;
-				                                listbut[list[indexstep].index1].BackColor = color;
-				                                button8.BackColor = color;
+				                                orange = start = yellow = 0;
+				                                listbut[list.get(indexstep).index1].setBackground(color);
+				                                buttonnumsrch.setBackground(color);
 				                                indexstep++;
 				                            }
 				                        }
 				                        else
 				                        {
-				                            listbut[list[indexstep].index1].BackColor = Color.Green;
+				                            listbut[list.get(indexstep).index1].setBackground(Color.green);
 				                            if (green < 80)
 				                                green++;
 				                            else
 				                            {
-				                                button8.Visible = false;
-				                                button8.BackColor = color;
-				                                label13.Visible = true;
-				                                label13.Text = "Tìm thấy !!!";
-				                                label13.ForeColor = Color.Green;
-				                                label17.Visible = false;
-				                                button5.Visible = false;
-				                                richTextBox2.Text = "";
-				                                timer.Stop();
+				                                buttonnumsrch.setVisible(false);
+				                                buttonnumsrch.setBackground(color);
+				                             //   label13.Visible = true;
+				                             //   label13.Text = "Tìm thấy !!!";
+				                                JOptionPane.showMessageDialog(rootPane, "Tìm thấy", "", JOptionPane.INFORMATION_MESSAGE);
+				                                labeli.setVisible(false);
+				                                buttonStop.setVisible(false);
+						                        buttonTiepTuc.setVisible(false);
+							                    indexstep = 0;
+				                                timer.stop();
 				                            }
 				                        }
 				                    }
 				                }
 				                else
 				                {
-				                    button8.Visible = false;
-				                    button8.BackColor = color;
-				                    label13.Visible = true;
-				                    label13.Text = "Không tìm thấy !!!";
-				                    label13.ForeColor = Color.Red;
-				                    label17.Visible = false;
-				                    button5.Visible = false;
-				                    richTextBox2.Text = "";
-				                    timer.Stop();
+				                    buttonnumsrch.setVisible(false);
+				                    buttonnumsrch.setBackground(color);
+				                    JOptionPane.showMessageDialog(contentPane, "Không tìm thấy", "", JOptionPane.INFORMATION_MESSAGE);				                   
+				                    labeli.setVisible(false);
+				                    buttonStop.setVisible(false);
+			                        buttonTiepTuc.setVisible(false);
+				                    indexstep = 0;
+				                    timer.stop();
 				                }
 				            }
 						}
 					});
+					timer.start();
 				}
 			}
 		});
@@ -2400,11 +2414,32 @@ public class Form1 extends JFrame {
 		labelright.setVisible(false);
 		contentPane.add(labelright);
 		
+		labelmid=new JLabel("mid");
+		labelmid.setFont(new Font("Tahoma", Font.BOLD, 16));
+		labelmid.setBounds(226, 315, 46, 19);
+		labelmid.setVisible(false);
+		contentPane.add(labelmid);
+		
 		labeldonvi = new JLabel("labeldonvi");
 		labeldonvi.setFont(new Font("Tahoma", Font.BOLD, 15));
 		labeldonvi.setBounds(1, 484, 91, 23);
 		labeldonvi.setVisible(false);
 		contentPane.add(labeldonvi);
+		
+		buttonnumsrch = new JButton("New button");	
+		buttonnumsrch.setBounds(619, 630, 60, 60);
+		buttonnumsrch.setVisible(false);
+		contentPane.add(buttonnumsrch);
+		
+		textareayTuong = new JTextArea();
+		textareayTuong.setEditable(false);
+		textareayTuong.setBounds(357, 310, 505, 56);
+		contentPane.add(textareayTuong);
+		
+		labelyTuong = new JLabel("Ý tưởng");
+		labelyTuong.setBounds(265, 329, 81, 18);
+		labelyTuong.setFont(new Font("Tahoma", Font.BOLD, 15));
+		contentPane.add(labelyTuong);
 		
 		
 	}
@@ -2840,7 +2875,7 @@ public class Form1 extends JFrame {
 	public void CodeLiS()
 	{
 		 model.addElement("for (int i = 0 ; i < N-1 ; i++)");
-         model.addElement("        if(a[i]==search");
+         model.addElement("        if(a[i]==search)");
          model.addElement("           return 1;");
          model.addElement("return 0;");
 	}
