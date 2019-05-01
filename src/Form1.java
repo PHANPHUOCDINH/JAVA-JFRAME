@@ -159,6 +159,12 @@ public class Form1 extends JFrame {
 		menuGioiThieu = new JMenu("Giới Thiệu");
 		menuBar.add(menuGioiThieu);
 		
+		JMenuItem mntmAboutUs = new JMenuItem("About Us");
+		menuGioiThieu.add(mntmAboutUs);
+		
+		JMenuItem mntmHngDnS = new JMenuItem("Hướng dẫn sử dụng");
+		menuGioiThieu.add(mntmHngDnS);
+		
 		radioButtonNhap = new JRadioButton("Nhập");
 		radioButtonNhap.setBounds(33, 26, 63, 23);
 		radioButtonNhap.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -387,6 +393,7 @@ public class Form1 extends JFrame {
 		buttonTaoLai = new JButton("Tạo Lại");
 		buttonTaoLai.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textareayTuong.setText(null);
 				labelLink.setVisible(false);
 				green=yellow=orange=purple=start=start_khoi_tao=indexstep=0;
 				arr=null;
@@ -496,6 +503,21 @@ public class Form1 extends JFrame {
                             }
                         }
 					}
+					labelLink.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						try {
+					         
+					        Desktop.getDesktop().browse(new URI("http://cunglaptrinh.blogspot.com/2015/03/thuat-toan-sap-xep-interchange-sort.html"));
+					         
+					    } catch (IOException | URISyntaxException e1) {
+					        e1.printStackTrace();
+					    }
+					}
+					});
+					labelLink.setText(labelLink.getText()+"Interchange Sort");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Lần lượt đẩy phần tử nhỏ(lớn) nhất của dãy arr[i]->arr[n-1] về arr[i] bằng cách đổi chỗ arr[i] với các phần tử nằm sau tương ứng");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -506,14 +528,23 @@ public class Form1 extends JFrame {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(start<50)
+							if(start<60)
 							{
+								if(start<30)
+								{
+									thuattoan.setSelectedIndex(0);
+								}
+								else
+								{
+								thuattoan.setSelectedIndex(1);
+								}
 								start++;
 							}
 							else
 							{
 								if(indexstep<list.size())
 								{
+									thuattoan.setSelectedIndex(2);
 									labeli.setLocation(xpos[list.get(indexstep).index1]+27,550);
 									labelj.setLocation(xpos[list.get(indexstep).index2]+27,550);
 									labeli.setVisible(true);
@@ -524,6 +555,7 @@ public class Form1 extends JFrame {
 				                    	yellow++;
 				                    else
 				                    {
+				                    	
 				                    	if(list.get(indexstep).check==0)
 				                    	{
 				                    		listbut[list.get(indexstep).index1].setBackground(Color.green); 
@@ -540,6 +572,7 @@ public class Form1 extends JFrame {
 				                    	}
 				                    	else
 				                    	{
+				                    		thuattoan.setSelectedIndex(3);
 				                    		listbut[list.get(indexstep).index1].setBackground(Color.red); 
 				                    		listbut[list.get(indexstep).index2].setBackground(Color.red);
 				                    		if(y1>380)
@@ -589,6 +622,7 @@ public class Form1 extends JFrame {
 									start=yellow=0;
 									labeli.setVisible(false);
 									labelj.setVisible(false);
+									//thuattoan.setSelectedIndex(arg0);
 									JOptionPane.showMessageDialog(rootPane, "Mảng đã sắp xếp xong", "", JOptionPane.INFORMATION_MESSAGE);
 									timer.stop();
 								}
@@ -665,6 +699,21 @@ public class Form1 extends JFrame {
                             }
                         }
 					}
+					labelLink.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							try {
+						         
+						        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/selection-sort/"));
+						         
+						    } catch (IOException | URISyntaxException e1) {
+						        e1.printStackTrace();
+						    }
+						}
+						});
+					labelLink.setText(labelLink.getText()+"Selection Sort");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Ý tưởng như Interchange Sort, nhưng chỉ đổi chổ 1 lần ở từng vòng lặp i dựa trên chỉ số min phụ");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -883,6 +932,21 @@ public class Form1 extends JFrame {
                             }
                         }
 					}
+					labelLink.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							try {
+						         
+						        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/bubble-sort/"));
+						         
+						    } catch (IOException | URISyntaxException e1) {
+						        e1.printStackTrace();
+						    }
+						}
+						});
+					labelLink.setText(labelLink.getText()+"Bubble Sort");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Ý tưởng như Interchange Sort, nhưng chiều đi ngược lại");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -1058,6 +1122,21 @@ public class Form1 extends JFrame {
                             arr[pos + 1] = x;
                         }
 					}
+					labelLink.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							try {
+						         
+						        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/insertion-sort/"));
+						         
+						    } catch (IOException | URISyntaxException e1) {
+						        e1.printStackTrace();
+						    }
+						}
+						});
+					labelLink.setText(labelLink.getText()+"Insertion Sort");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Tìm vị trí thích hợp cho phàn tử là vị trí đứng trước phần tử lớn hơn nó và sau phần tử nhỏ hơn hoặc bằng nó");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -1174,6 +1253,21 @@ public class Form1 extends JFrame {
 						CodeQS(tang_giam);
 						quickSort(arr, 0, arr.length - 1, listbut, tang_giam);
 					}
+					labelLink.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							try {
+						         
+						        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/quick-sort/"));
+						         
+						    } catch (IOException | URISyntaxException e1) {
+						        e1.printStackTrace();
+						    }
+						}
+						});
+					labelLink.setText(labelLink.getText()+"Quick Sort");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Lựa chọn 1 phần tử làm mốc bất kỳ trong dãy đang xét và xếp lại dãy sao cho bên trái phần tử đó đều nhỏ(lớn) hơn và bên phải phần tử đó đều lớn(nhỏ) hơn , tiếp tực xét 2 dãy đó tới khi nào các dãy xét chỉ còn 1 phần tử");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -1487,6 +1581,21 @@ public class Form1 extends JFrame {
                         }
                         list.add(new Step(left, right, k, -1, 3,-1,-1,-1,null));
 					}
+					labelLink.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							try {
+						         
+						        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/cocktail-sort/"));
+						         
+						    } catch (IOException | URISyntaxException e1) {
+						        e1.printStackTrace();
+						    }
+						}
+						});
+					labelLink.setText(labelLink.getText()+"Shaker Sort");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Lượt đi: đẩy phần tử nhỏ nhất(lớn nhất) về đầu mảng, Lượt về: đẩy phần tử lớn nhất(nhỏ nhất) về cuối mảng");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -1854,6 +1963,21 @@ public class Form1 extends JFrame {
 						CodeRdS(tang_giam);
 						radixsort(arr, arr.length, listbut, 1);
 					}
+					labelLink.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							try {
+						         
+						        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/radix-sort/"));
+						         
+						    } catch (IOException | URISyntaxException e1) {
+						        e1.printStackTrace();
+						    }
+						}
+						});
+					labelLink.setText(labelLink.getText()+"Radix Sort");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Giả sử dãy gồm các số nguyên tối đa m chữ số. Tiến hành phân loại theo các chữ số hàng đơn vị,hàng chục,hàng trăm,...");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -2050,6 +2174,21 @@ public class Form1 extends JFrame {
                     buttonnumsrch.setText(Integer.toString(numsrch));
                     buttonnumsrch.setVisible(true);
                     CodeBiS();
+                    labelLink.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							try {
+						         
+						        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/binary-search/"));
+						         
+						    } catch (IOException | URISyntaxException e1) {
+						        e1.printStackTrace();
+						    }
+						}
+						});
+                    labelLink.setText(labelLink.getText()+"Binary Search");
+					labelLink.setVisible(true);
+					textareayTuong.setText("So sánh giá trị tìm kiếm với phần tử chính giữa của mảng đang xét, nếu nhỏ hơn thì xét tiếp mảng ở bên trái, nếu lớn hơn thì xét tiếp ở mảng bên phải");
                     buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -2188,6 +2327,21 @@ public class Form1 extends JFrame {
 					buttonnumsrch.setText(Integer.toString(numsrch));
 	                buttonnumsrch.setVisible(true);
 					CodeLiS();
+					 labelLink.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
+								try {
+							         
+							        Desktop.getDesktop().browse(new URI("https://www.geeksforgeeks.org/linear-search/"));
+							         
+							    } catch (IOException | URISyntaxException e1) {
+							        e1.printStackTrace();
+							    }
+							}
+							});
+					 labelLink.setText(labelLink.getText()+"Linear Search");
+					labelLink.setVisible(true);
+					textareayTuong.setText("Lần lượt so sánh giá trị tìm kiếm với phần tử a[i] với i là chỉ số chạy từ 0->n-1");
 	                buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -2337,10 +2491,10 @@ public class Form1 extends JFrame {
 		contentPane.add(labelmin);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(872, 31, 478, 335);
+		scrollPane.setBounds(872, 31, 478, 304);
 		contentPane.add(scrollPane);
 		
-		labelLink = new JLabel("Click here for more information");
+		labelLink = new JLabel("Tham khảo thêm về thuật toán ");
 //		labelLink.addMouseListener(new MouseAdapter() {
 //			@Override
 //			public void mouseClicked(MouseEvent arg0) {
@@ -2355,7 +2509,7 @@ public class Form1 extends JFrame {
 //		});
 		labelLink.setForeground(Color.BLUE);
 		labelLink.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelLink.setBounds(557, 603, 230, 21);
+		labelLink.setBounds(906, 346, 417, 21);
 		labelLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labelLink.setVisible(false);
 		contentPane.add(labelLink);
@@ -2433,6 +2587,8 @@ public class Form1 extends JFrame {
 		
 		textareayTuong = new JTextArea();
 		textareayTuong.setEditable(false);
+		textareayTuong.setForeground(Color.BLUE);
+		textareayTuong.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		textareayTuong.setBounds(357, 310, 505, 56);
 		contentPane.add(textareayTuong);
 		
@@ -2748,55 +2904,55 @@ public class Form1 extends JFrame {
 	}
 	public void CodeQS(int check)
 	{
-		 model.addElement("int partition(int []a,int low,int high)\n{");
-         model.addElement("      int pivot = a[high];");
+		 model.addElement("int partition(int []arr,int low,int high)\n{");
+         model.addElement("      int pivot = arr[high];");
          model.addElement("      int i = (low - 1);");
          model.addElement("      for (int j = low; j < high; j++)");
          model.addElement("      {");
          if (check == 1)
          {
-             model.addElement("            if (a[j] <= pivot)");
+             model.addElement("            if (arr[j] <= pivot)");
          }
          else
          {
-             model.addElement("            if (a[j] >= pivot)");
+             model.addElement("            if (arr[j] >= pivot)");
          }
          model.addElement("            {");
          model.addElement("                  i++;");
-         model.addElement("                  Swap(a[i],a[j]);");
+         model.addElement("                  Swap(arr[i],arr[j]);");
          model.addElement("            }");
          model.addElement("      }");
-         model.addElement("      Swap(temp1,a[i+1]);");
+         model.addElement("      Swap(temp1,arr[i+1]);");
          model.addElement("      return i+1;");
          model.addElement("}");
          model.addElement("");
          model.addElement("");
-         model.addElement("void quickSort(int []a, int low, int high)\n{");
+         model.addElement("void quickSort(int []arr, int low, int high)\n{");
          model.addElement("      if (low < high)");
          model.addElement("      {");
-         model.addElement("           int pivot = partition(a, low, high);");
-         model.addElement("           quickSort(a, low, pivot-1);");
-         model.addElement("           quickSort(a, pivot+1, high);");
+         model.addElement("           int pivot = partition(arr, low, high);");
+         model.addElement("           quickSort(arr, low, pivot-1);");
+         model.addElement("           quickSort(arr, pivot+1, high);");
          model.addElement("      }");
          model.addElement("}");
 	}
 	public void CodeShS(int check)
 	{
-		model.addElement("int left = 0, right = a.Length - 1, k = a.Length - 1;");
+		model.addElement("int left = 0, right = arr.Length - 1, k = arr.Length - 1;");
         model.addElement("while (left<right)");
         model.addElement("{");
         model.addElement("           for (int j = right; j > left; j--)");
         model.addElement("           {");
         if (check == 1)
         {
-            model.addElement("                      if (a[j] < a[j - 1])");
+            model.addElement("                      if (arr[j] < arr[j - 1])");
         }
         else
         {
-            model.addElement("                      if (a[j] > a[j - 1])");
+            model.addElement("                      if (arr[j] > arr[j - 1])");
         }
         model.addElement("                      {");
-        model.addElement("                                Swap(a[j],a[j-1]);");
+        model.addElement("                                Swap(arr[j],arr[j-1]);");
         model.addElement("                                k=j;");
         model.addElement("                      }");
         model.addElement("           }");
@@ -2805,14 +2961,14 @@ public class Form1 extends JFrame {
         model.addElement("           {");
         if (check == 1)
         {
-            model.addElement("                      if (a[j] > a[j + 1])");
+            model.addElement("                      if (arr[j] > arr[j + 1])");
         }
         else
         {
-            model.addElement("                      if (a[j] < a[j + 1])");
+            model.addElement("                      if (arr[j] < arr[j + 1])");
         }
         model.addElement("                      {");
-        model.addElement("                                Swap(a[j],a[j+1]);");
+        model.addElement("                                Swap(arr[j],arr[j+1]);");
         model.addElement("                                k=j;");
         model.addElement("                      }");
         model.addElement("           }");
@@ -2821,25 +2977,25 @@ public class Form1 extends JFrame {
 	}
 	public void CodeRdS(int check)
 	{
-		model.addElement("static void radixsort(int []a,int n)\n{");
-        model.addElement("      int m = getMax(a, n);");
+		model.addElement("static void radixsort(int []arr,int n)\n{");
+        model.addElement("      int m = getMax(arr, n);");
         model.addElement("      for (int exp = 1; m / exp > 0; exp *= 10)");
         model.addElement("      {");
-        model.addElement("            countSort(a, n, exp);");
+        model.addElement("            countSort(arr, n, exp);");
         model.addElement("      }");
         model.addElement("}");
-        model.addElement("static int getMax(int []a,int n)\n{");
-        model.addElement("      int mx = a[0];");
+        model.addElement("static int getMax(int []arr,int n)\n{");
+        model.addElement("      int mx = arr[0];");
         model.addElement("      for (int i = 1; i < n; i++)");
-        model.addElement("            if (a[i] > mx)");
-        model.addElement("                 mx = a[i];");
+        model.addElement("            if (arr[i] > mx)");
+        model.addElement("                 mx = arr[i];");
         model.addElement("return mx;");
         model.addElement("}");
-        model.addElement("static void countSort(int []a, int n, int exp)\n{");
+        model.addElement("static void countSort(int []arr, int n, int exp)\n{");
         model.addElement("      int[] output = new int[n];");
         model.addElement("      int[] count = new int[10];");
         model.addElement("      for (int i = 0; i < n; i++)");
-        model.addElement("            count[(a[i] / exp) % 10]++;");
+        model.addElement("            count[(arr[i] / exp) % 10]++;");
         if (check == 1)
         {
             model.addElement("      for (int i = 1; i < 10; i++)");
@@ -2852,12 +3008,12 @@ public class Form1 extends JFrame {
         }
         model.addElement("      for (int i = n - 1; i >= 0; i--)");
         model.addElement("      {");
-        model.addElement("            output[count[(a[i] / exp) % 10] - 1] = a[i];");
-        model.addElement("            count[(a[i] / exp) % 10]--;");
+        model.addElement("            output[count[(arr[i] / exp) % 10] - 1] = arr[i];");
+        model.addElement("            count[(arr[i] / exp) % 10]--;");
         model.addElement("      }");
         model.addElement("      for (int i = 0; i < n; i++)");
         model.addElement("      {");
-        model.addElement("            a[i] = output[i];");
+        model.addElement("            arr[i] = output[i];");
         model.addElement("      }");
         model.addElement("}");
 	}
@@ -2866,16 +3022,16 @@ public class Form1 extends JFrame {
 		model.addElement("int left, right, mid; left=0; right=N-1;");
         model.addElement("do{ ");
         model.addElement("           mid=(left+right)/2;");
-        model.addElement("           if(a[mid]==x) return 1;");
-        model.addElement("           else if(a[mid]<x) left=mid+1;");
-        model.addElement("                      else if(a[mid]>x) right=mid-1;");
+        model.addElement("           if(arr[mid]==x) return 1;");
+        model.addElement("           else if(arr[mid]<x) left=mid+1;");
+        model.addElement("                      else if(arr[mid]>x) right=mid-1;");
         model.addElement("}while(left<=right);");
         model.addElement("return 0;");
 	}
 	public void CodeLiS()
 	{
 		 model.addElement("for (int i = 0 ; i < N-1 ; i++)");
-         model.addElement("        if(a[i]==search)");
+         model.addElement("        if(arr[i]==search)");
          model.addElement("           return 1;");
          model.addElement("return 0;");
 	}
