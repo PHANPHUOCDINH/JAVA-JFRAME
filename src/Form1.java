@@ -77,7 +77,7 @@ public class Form1 extends JFrame {
 	private JButton buttonStop;
 	private Color color=Color.white;
 	private List<Step> list= new ArrayList<Step>();
-	private int start = 0, green = 0, yellow = 0,indexstep=0,y1=460,y2=380,speed=5,start_khoi_tao=0,orange=0,purple=0;
+	private int start = 0, green = 0, yellow = 0,indexstep=0,y1=460,y2=380,speed=5,start_khoi_tao=0,orange=0,purple=0,temp1=0;
 	private JList<String> thuattoan;
 	private JScrollPane scrollPane;
 	private DefaultListModel<String> model= new DefaultListModel<>();
@@ -433,6 +433,7 @@ public class Form1 extends JFrame {
 				buttonStart.setVisible(false);
 				buttonTaoLai.setVisible(false);
 				buttonStop.setVisible(false);
+				buttonTiepTuc.setVisible(false);
 				labeli.setVisible(false);
 				labelj.setVisible(false);
 				labelx.setVisible(false);
@@ -445,6 +446,9 @@ public class Form1 extends JFrame {
 				labellow.setVisible(false);
 				labelpivot.setVisible(false);
 				labeldonvi.setVisible(false);
+				labelleft.setVisible(false);
+				labelright.setVisible(false);
+				labelmid.setVisible(false);
 			//	label
 				if(timer!=null)
 					{
@@ -517,7 +521,7 @@ public class Form1 extends JFrame {
 					});
 					labelLink.setText(labelLink.getText()+"Interchange Sort");
 					labelLink.setVisible(true);
-					textareayTuong.setText("Lần lượt đẩy phần tử nhỏ(lớn) nhất của dãy arr[i]->arr[n-1] về arr[i] bằng cách đổi chỗ arr[i] với các phần tử nằm sau tương ứng");
+					textareayTuong.setText("Sắp xếp từng vị trí của mảng từ trái qua phải, sao cho \r\nvị trí đang xét có giá trị nhỏ nhất(lớn nhất) so với các \r\nsố đứng sau nó");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -713,7 +717,7 @@ public class Form1 extends JFrame {
 						});
 					labelLink.setText(labelLink.getText()+"Selection Sort");
 					labelLink.setVisible(true);
-					textareayTuong.setText("Ý tưởng như Interchange Sort, nhưng chỉ đổi chổ 1 lần ở từng vòng lặp i dựa trên chỉ số min phụ");
+					textareayTuong.setText("Ý tưởng như Interchange Sort, nhưng chỉ đổi chổ 1 lần ở \r\ntừng vòng lặp i dựa trên chỉ số min phụ");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -725,25 +729,31 @@ public class Form1 extends JFrame {
 				
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							if (start_khoi_tao < 57)
+							if (start_khoi_tao < 40)
 							{
+								thuattoan.setSelectedIndex(0);
 				                start_khoi_tao++;
 				            }
+							else
 				            {
-				                if (start < 68)
+				                if (start < 40)
 				                {
+				                	thuattoan.setSelectedIndex(2);
 				                    start++;
 				                }
 				                else
 				                {
 				                    if (indexstep < list.size())
-				                    {
+				                    {				                    	
 				                        labeli.setLocation(xpos[list.get(indexstep).index1] + 27, 550);
 				                        labeli.setVisible(true);
 				                        if (list.get(indexstep).para2 == 0)
 				                        {
+				                        	
+				                        	thuattoan.setSelectedIndex(4);
+				                        	
 				                        	labelj.setLocation(xpos[list.get(indexstep).index2] + 27, 580);
-				                        	labelmin.setLocation(xpos[list.get(indexstep).para1] + 19, 580);
+				                        	labelmin.setLocation(xpos[list.get(indexstep).para1] + 15, 580);
 				                        	labelj.setVisible(true);
 				                        	labelmin.setVisible(true);
 				                            listbut[list.get(indexstep).para1].setBackground(Color.yellow);
@@ -754,8 +764,9 @@ public class Form1 extends JFrame {
 				                            }
 				                            else
 				                            {
+				                            	
 				                                if (list.get(indexstep).check == 0)
-				                                {
+				                                {				                                	
 				                                    listbut[list.get(indexstep).para1].setBackground(Color.green);
 				                                    listbut[list.get(indexstep).index2].setBackground(Color.green);
 				                                    if (green < 80)
@@ -771,10 +782,12 @@ public class Form1 extends JFrame {
 				                                        listbut[list.get(indexstep).index2].setBackground(color);
 				                                        //labelj.setVisible(false);
 				                                        indexstep++;
+				                                        start=start_khoi_tao=0;
 				                                    }
 				                                }
 				                                else
 				                                {
+				                                	thuattoan.setSelectedIndex(5);
 				                                    listbut[list.get(indexstep).para1].setBackground(Color.orange);
 				                                    listbut[list.get(indexstep).index2].setBackground(Color.orange);
 				                                    if (orange < 80)
@@ -790,13 +803,14 @@ public class Form1 extends JFrame {
 				                                        listbut[list.get(indexstep).para1].setBackground(color);
 				                                        listbut[list.get(indexstep).index2].setBackground(color);
 				                                        indexstep++;
+				                                        start=start_khoi_tao=0;
 				                                    }
 				                                }
 				                            }
 				                        }
 				                        else
 				                        {
-				                            labelmin.setLocation(xpos[list.get(indexstep).para1] + 19, 580); 
+				                            labelmin.setLocation(xpos[list.get(indexstep).para1] + 15, 580); 
 				                            listbut[list.get(indexstep).para1].setBackground(Color.yellow);
 				                            listbut[list.get(indexstep).index1].setBackground(Color.yellow);
 				                            if (yellow < 65)
@@ -840,7 +854,7 @@ public class Form1 extends JFrame {
 				                                                listbut[list.get(indexstep).para1].setBackground(color);
 				                                                indexstep++;
 				                                                y1 = 460; y2 = 380;
-				                                                start = 0;
+				                                                start =start_khoi_tao= 0;
 				                                                yellow = 0;
 				                                            }
 				                                        }
@@ -862,6 +876,7 @@ public class Form1 extends JFrame {
 				                                        listbut[list.get(indexstep).index1].setBackground(color);
 				                                        listbut[list.get(indexstep).para2].setBackground(color);
 				                                        indexstep++;
+				                                        start =start_khoi_tao= 0;
 				                                    }
 				                                }
 				                            }
@@ -872,7 +887,7 @@ public class Form1 extends JFrame {
 				                    	buttonStop.setVisible(false);
 					                    buttonTiepTuc.setVisible(false);
 				                    	indexstep=0;
-										start=yellow=0;
+										start=start_khoi_tao=yellow=0;
 										labeli.setVisible(false);
 										labelj.setVisible(false);
 										labelmin.setVisible(false);
@@ -961,42 +976,65 @@ public class Form1 extends JFrame {
 							if (start_khoi_tao < 40)
 				            {
 				                start_khoi_tao++;
+				               // thuattoan.setSelectedIndex(0);
 				            }
 				            else
 				            {
-				                if (start < 58)
+				                if (start < 38)
+				                {
 				                    start++;
+				               //     thuattoan.setSelectedIndex(1);
+				                }
 				                else
 				                {
 				                    if (indexstep < list.size())
 				                    {
-				                        labeli.setLocation(xpos[list.get(indexstep).index1] + 27, 550);
-				                        labeli.setVisible(true);
-				                        labelj.setLocation(xpos[list.get(indexstep).Xleft] + 27, 580);
-				                        labelj.setVisible(true);
-				                        if (arr.length - 1 == list.get(indexstep).Xleft)
+				                    	labeli.setLocation(xpos[list.get(indexstep).index1] + 27, 550);
+				                        
+				                        labeli.setVisible(true);				                          
+//				                        if (arr.length - 1 == list.get(indexstep).Xleft)
+//				                        {
+//				                        	
+//				                        }
+//				                        else
+//				                        {
+//
+//				                        }
+				                        if(list.get(indexstep).Xleft==arr.length-1&&green==0)
 				                        {
-				                        	
+				                        	thuattoan.setSelectedIndex(0);
 				                        }
 				                        else
 				                        {
-
+				                        	thuattoan.setSelectedIndex(2);
+				                        	
 				                        }
 				                        listbut[list.get(indexstep).index1].setBackground(Color.magenta);
 				                        if (purple < 58)
+				                        {
 				                            purple++;
+				                            labelj.setLocation(xpos[list.get(indexstep).Xleft] + 27, 580);
+				                            if(purple>29) {
+						                    labelj.setVisible(true);
+					                        thuattoan.setSelectedIndex(1);
+				                            }
+				                        }
 				                        else
 				                        {
+				                        	
+						                      
 				                            listbut[list.get(indexstep).index2].setBackground(Color.yellow);
 				                            listbut[list.get(indexstep).Xleft].setBackground(Color.yellow);
 				                            if (yellow < 60)
 				                            {
+				                            	thuattoan.setSelectedIndex(2);
 				                                yellow++;
 				                            }
 				                            else
 				                            {
 				                                if (list.get(indexstep).Xright == 1)
 				                                {
+				                                	thuattoan.setSelectedIndex(3);
 				                                    listbut[list.get(indexstep).index2].setBackground(Color.red);
 				                                    listbut[list.get(indexstep).Xleft].setBackground(Color.red);
 				                                    if (y1 > 380)
@@ -1119,6 +1157,7 @@ public class Form1 extends JFrame {
                                 pos--;
                             }
                             list.add(new Step(i, x, pos + 1, 0,-1,-1,-1,-1,null));
+                           
                             arr[pos + 1] = x;
                         }
 					}
@@ -1136,7 +1175,7 @@ public class Form1 extends JFrame {
 						});
 					labelLink.setText(labelLink.getText()+"Insertion Sort");
 					labelLink.setVisible(true);
-					textareayTuong.setText("Tìm vị trí thích hợp cho phàn tử là vị trí đứng trước phần tử lớn hơn nó và sau phần tử nhỏ hơn hoặc bằng nó");
+					textareayTuong.setText("Tìm vị trí thích hợp cho từng phần tử sao cho phần tử \r\ntrước lớn hơn nó và phần tử sau nhỏ hơn hoặc bằng nó, \r\nvà chèn vào vị trí đó");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -1147,10 +1186,12 @@ public class Form1 extends JFrame {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
+							//if(start)
 							// TODO Auto-generated method stub
 							if (start < 40)
 				            {
 				                start++;
+				                thuattoan.setSelectedIndex(0);
 				            }
 				            else
 				            {
@@ -1170,7 +1211,7 @@ public class Form1 extends JFrame {
 				                            listbut[list.get(indexstep).Xleft].setBackground(color);
 				                            listbut[list.get(indexstep).Xleft + 1].setText(listbut[list.get(indexstep).Xleft].getText()); 
 				                            listbut[list.get(indexstep).Xleft + 1].setBackground(color);
-				                            start = 0;
+				             //               start = 0;
 				                            indexstep++;
 				                            yellow = 0;
 				                        }
@@ -1181,7 +1222,7 @@ public class Form1 extends JFrame {
 				                        {
 				                            labelpos.setText("pos+1");
 				                            labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 6, 575);
-				                           // richTextBox2.Text = "a[pos+1] = x;";
+				                            thuattoan.setSelectedIndex(8);
 				                            listbut[list.get(indexstep).Xleft].setBackground(Color.magenta);
 				                            if (purple < 60)
 				                                purple++;
@@ -1197,21 +1238,39 @@ public class Form1 extends JFrame {
 				                        else
 				                        {
 				                            labelpos.setText("pos");
+				                            
 				                            //richTextBox2.Text = "for(int i=1 ; i<n ; i++)\n{      int x = a[i];\n       pos=i-1;";
 				                            labeli.setLocation(listbut[list.get(indexstep).index1].getLocation().x + 27, listbut[list.get(indexstep).index1].getLocation().y + 90);
 				                            labeli.setVisible(true);
 				                            labelx.setLocation(listbut[list.get(indexstep).index1].getLocation().x+5, listbut[list.get(indexstep).index1].getLocation().y - 25);
-				                            labelx.setVisible(true);
 				                            labelx.setText("x = "+list.get(indexstep).index2);
+				                            if(green<20)
+				                            {
+				                            labelx.setVisible(true);
+				                            thuattoan.setSelectedIndex(1);
+				                            green++;
+				                            }
+				                            else
+				                            {
+				                            	
+				                            
 				                            labelpos.setLocation(xpos[list.get(indexstep).Xleft] + 16, 575);
+				                            	if(green<40)
+				                            	{
+				                            green++;
 				                            labelpos.setVisible(true);
+				                            thuattoan.setSelectedIndex(2);
+				                            	}
+				                            	else {
 				                            if (orange < 10)
 				                                orange++;
 				                            else
 				                            {
 				                                orange = 0;
-				                                start = 0;
+				                            //    start = 0;
 				                                indexstep++;
+				                            }
+				                            	}
 				                            }
 				                        }
 				                    }
@@ -1267,7 +1326,7 @@ public class Form1 extends JFrame {
 						});
 					labelLink.setText(labelLink.getText()+"Quick Sort");
 					labelLink.setVisible(true);
-					textareayTuong.setText("Lựa chọn 1 phần tử làm mốc bất kỳ trong dãy đang xét và xếp lại dãy sao cho bên trái phần tử đó đều nhỏ(lớn) hơn và bên phải phần tử đó đều lớn(nhỏ) hơn , tiếp tực xét 2 dãy đó tới khi nào các dãy xét chỉ còn 1 phần tử");
+					textareayTuong.setText("Lựa chọn 1 phần tử làm mốc bất kỳ trong dãy đang xét và \r\nxếp lại dãy sao cho bên trái phần tử đó đều nhỏ(lớn) hơn \r\nvà bên phải phần tử đó đều lớn(nhỏ) hơn");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -1279,7 +1338,7 @@ public class Form1 extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							if (start < 40)
+							if (start < 22)
 				                start++;
 				            else
 				            {
@@ -1301,16 +1360,16 @@ public class Form1 extends JFrame {
 				                            }
 				                            else
 				                            {
-				                                labelArrowR.setLocation(xpos[list.get(indexstep).Xleft] - 6, 450);
-				                                labelArrowL.setLocation(xpos[list.get(indexstep).Xright] + 66, 450);
+				                                labelArrowR.setLocation(xpos[list.get(indexstep).Xleft] -1, 435);
+				                                labelArrowL.setLocation(xpos[list.get(indexstep).Xright] + 30, 435);
 				                                listbut[list.get(indexstep).Xright].setBackground(Color.orange);
-				                                labelpivot.setLocation(xpos[list.get(indexstep).Xright] + 24, 445);
-				                                labellow.setLocation(xpos[list.get(indexstep).Xleft] + 29, 535);
-				                                labelhigh.setLocation(xpos[list.get(indexstep).Xright] + 24, 535);
+				                                labelpivot.setLocation(xpos[list.get(indexstep).Xright] + 11, 418);
+				                                labellow.setLocation(xpos[list.get(indexstep).Xleft] +18, 	545);
+				                                labelhigh.setLocation(xpos[list.get(indexstep).Xright] + 15, 545);
 				                                if (list.get(indexstep).Xleft == 0)
-				                                    labeli.setLocation(xpos[list.get(indexstep).Xleft] - 21, 560);
+				                                    labeli.setLocation(xpos[list.get(indexstep).Xleft] - 18, 566);
 				                                else
-				                                    labeli.setLocation(xpos[list.get(indexstep).Xleft - 1] + 40, 560);
+				                                    labeli.setLocation(xpos[list.get(indexstep).Xleft - 1] + 27, 586);
 				                                labellow.setVisible(true);
 				                                labelpivot.setVisible(true);
 				                                labelhigh.setVisible(true);
@@ -1387,7 +1446,7 @@ public class Form1 extends JFrame {
 				                                start_khoi_tao++;
 				                            //    richTextBox2.Text = (tang_giam == 1) ? "for (int j = low; j < high; j++)\n{\n(arr[j] <= pivot)?" : "for (int j = low; j < high; j++)\n{\n(arr[j] >= pivot)?";
 				                            }
-				                            labelj.setLocation(xpos[list.get(indexstep).index2] + 40, 585);
+				                            labelj.setLocation(xpos[list.get(indexstep).index2] + 27, 586);
 				                            labelj.setVisible(true);
 				                            listbut[list.get(indexstep).index2].setBackground(Color.yellow);
 				                            if (yellow < 60)
@@ -1397,7 +1456,7 @@ public class Form1 extends JFrame {
 				                                if (list.get(indexstep).check == 1)
 				                                {
 				                                //    richTextBox2.Text = "i++;\nSwap(a[i],a[j]);";
-				                                    labeli.setLocation(xpos[list.get(indexstep).index1] + 40, 560);
+				                                    labeli.setLocation(xpos[list.get(indexstep).index1] + 27, 566);
 				                                    labeli.setVisible(true);
 				                                    listbut[list.get(indexstep).index2].setBackground(Color.red);
 				                                    if (orange < 58)
@@ -1595,7 +1654,7 @@ public class Form1 extends JFrame {
 						});
 					labelLink.setText(labelLink.getText()+"Shaker Sort");
 					labelLink.setVisible(true);
-					textareayTuong.setText("Lượt đi: đẩy phần tử nhỏ nhất(lớn nhất) về đầu mảng, Lượt về: đẩy phần tử lớn nhất(nhỏ nhất) về cuối mảng");
+					textareayTuong.setText("Lượt đi: đẩy phần tử nhỏ nhất(lớn nhất) về đầu mảng, \r\nLượt về: đẩy phần tử lớn nhất(nhỏ nhất) về cuối mảng");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -1607,7 +1666,7 @@ public class Form1 extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							if (start_khoi_tao < 57)
+							if (start_khoi_tao < 37)
 				            {
 				           //     richTextBox2.Text = "";
 				                start_khoi_tao++;
@@ -1619,14 +1678,14 @@ public class Form1 extends JFrame {
 				                    if (list.get(indexstep).check == 0)
 				                    {
 				                        labelj.setVisible(false);
-				                        labelleft.setLocation(xpos[list.get(indexstep).index1] + 32, 535);
-				                        labelright.setLocation(xpos[list.get(indexstep).index2] + 30, 562);
-				                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 39, 590);
+				                        labelleft.setLocation(xpos[list.get(indexstep).index1] + 15, 550);
+				                        labelright.setLocation(xpos[list.get(indexstep).index2] + 13, 565);
+				                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 27, 405);
 				                        labelleft.setVisible(true);
 				                        labelright.setVisible(true);
 				                        labelk.setVisible(true);
 				                   //     richTextBox2.Text = "int left = 0,right = t.Length - 1,k = t.Length - 1;";
-				                        if (purple < 50)
+				                        if (purple < 40)
 				                            purple++;
 				                        else
 				                        {
@@ -1642,8 +1701,8 @@ public class Form1 extends JFrame {
 				                            if (list.get(indexstep).para1 == 1)
 				                            {
 				                             //   richTextBox2.Text = "for (int j = right; j > left; j--)";
-				                                labelArrowL.setLocation(xpos[list.get(indexstep).para2] + 66, 450);
-				                                labelj.setLocation(xpos[list.get(indexstep).para3] + 41, 440);
+				                                labelArrowL.setLocation(xpos[list.get(indexstep).para2] + 30, 435);
+				                                labelj.setLocation(xpos[list.get(indexstep).para3] + 27, 422);
 				                                labelArrowL.setVisible(true);
 				                                labelj.setVisible(true);
 				                                if (yellow < 35)
@@ -1690,7 +1749,7 @@ public class Form1 extends JFrame {
 				                                                    }
 				                                                    else
 				                                                    {
-				                                                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 39, 590);
+				                                                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 27, 405);
 				                                                        JButton A = listbut[list.get(indexstep).Xright];
 				                                                        listbut[list.get(indexstep).Xright] = listbut[list.get(indexstep).para3];
 				                                                        listbut[list.get(indexstep).para3] = A;
@@ -1712,8 +1771,8 @@ public class Form1 extends JFrame {
 				                            else
 				                            {
 				                              //  richTextBox2.Text = "for (int j = left; j < right; j++)";
-				                                labelArrowR.setLocation(xpos[list.get(indexstep).para2] - 6, 450);
-				                                labelj.setLocation(xpos[list.get(indexstep).Xright] + 41, 440);
+				                                labelArrowR.setLocation(xpos[list.get(indexstep).para2] - 1, 435);
+				                                labelj.setLocation(xpos[list.get(indexstep).Xright] + 27, 422);
 				                                labelArrowR.setVisible(true);
 				                                labelj.setVisible(true);
 				                                if (yellow < 30)
@@ -1760,7 +1819,7 @@ public class Form1 extends JFrame {
 				                                                    }
 				                                                    else
 				                                                    {
-				                                                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 39, 590);
+				                                                        labelk.setLocation(xpos[list.get(indexstep).Xleft] + 27, 405);
 				                                                        JButton A = listbut[list.get(indexstep).Xright];
 				                                                        listbut[list.get(indexstep).Xright] = listbut[list.get(indexstep).para3];
 				                                                        listbut[list.get(indexstep).para3] = A;
@@ -1787,8 +1846,8 @@ public class Form1 extends JFrame {
 				                                if (list.get(indexstep).para1 == 1)
 				                                {
 				                                 //   richTextBox2.Text = "for (int j = right; j < left; j--)";
-				                                    labelj.setLocation(xpos[list.get(indexstep).Xright] + 41, 440);
-				                                    labelArrowL.setLocation(xpos[list.get(indexstep).index2] + 66, 450);
+				                                    labelj.setLocation(xpos[list.get(indexstep).Xright] + 27, 422);
+				                                    labelArrowL.setLocation(xpos[list.get(indexstep).index2] + 30, 435);
 				                                    labelArrowL.setVisible(true);
 				                                    labelj.setVisible(true);
 				                                    if (orange < 40)
@@ -1822,8 +1881,8 @@ public class Form1 extends JFrame {
 				                                else
 				                                {
 				                                //    richTextBox2.Text = "for (int j = left; j < right; j++)";
-				                                    labelj.setLocation(xpos[list.get(indexstep).Xright] + 41, 440);
-				                                    labelArrowR.setLocation(xpos[list.get(indexstep).index1] - 6, 450);
+				                                    labelj.setLocation(xpos[list.get(indexstep).Xright] + 27, 422);
+				                                    labelArrowR.setLocation(xpos[list.get(indexstep).index1] - 1, 435);
 				                                    labelArrowR.setVisible(true);
 				                                    labelj.setVisible(true);
 				                                    if (orange < 35)
@@ -1870,7 +1929,7 @@ public class Form1 extends JFrame {
 				                                            }
 				                                        }
 				                                        labelArrowL.setVisible(false);
-				                                        labelleft.setLocation(xpos[list.get(indexstep).Xleft] + 32, 535);
+				                                        labelleft.setLocation(xpos[list.get(indexstep).Xleft] + 15, 550);
 				                                    }
 				                                    else
 				                                    {
@@ -1883,7 +1942,7 @@ public class Form1 extends JFrame {
 				                                            }
 				                                        }
 				                                        labelArrowR.setVisible(false);
-				                                        labelright.setLocation(xpos[list.get(indexstep).Xleft] + 30, 562);
+				                                        labelright.setLocation(xpos[list.get(indexstep).Xleft] + 13, 565);
 				                                    }
 				                                    labelj.setVisible(false);
 				                                    if (green < 40)
@@ -1977,7 +2036,7 @@ public class Form1 extends JFrame {
 						});
 					labelLink.setText(labelLink.getText()+"Radix Sort");
 					labelLink.setVisible(true);
-					textareayTuong.setText("Giả sử dãy gồm các số nguyên tối đa m chữ số. Tiến hành phân loại theo các chữ số hàng đơn vị,hàng chục,hàng trăm,...");
+					textareayTuong.setText("Giả sử dãy gồm các số nguyên tối đa m chữ số. Tiến hành phân loại \r\ntheo các chữ số hàng đơn vị,hàng chục,hàng trăm,...");
 					buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -2188,7 +2247,7 @@ public class Form1 extends JFrame {
 						});
                     labelLink.setText(labelLink.getText()+"Binary Search");
 					labelLink.setVisible(true);
-					textareayTuong.setText("So sánh giá trị tìm kiếm với phần tử chính giữa của mảng đang xét, nếu nhỏ hơn thì xét tiếp mảng ở bên trái, nếu lớn hơn thì xét tiếp ở mảng bên phải");
+					textareayTuong.setText("So sánh giá trị tìm kiếm với phần tử chính giữa của mảng \r\nđang xét, nếu nhỏ hơn thì xét tiếp mảng ở bên trái, nếu \r\nlớn hơn thì xét tiếp ở mảng bên phải");
                     buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -2341,7 +2400,7 @@ public class Form1 extends JFrame {
 							});
 					 labelLink.setText(labelLink.getText()+"Linear Search");
 					labelLink.setVisible(true);
-					textareayTuong.setText("Lần lượt so sánh giá trị tìm kiếm với phần tử a[i] với i là chỉ số chạy từ 0->n-1");
+					textareayTuong.setText("Lần lượt so sánh giá trị tìm kiếm với từng phần tử trong \r\nmảng");
 	                buttonStart.setVisible(false);
 					buttonStop.setVisible(true);
 					thuattoan=new JList<>(model);
@@ -2357,6 +2416,7 @@ public class Form1 extends JFrame {
 							if (start < 55)
 				            {
 				          //      richTextBox2.Text = "for(int i=0;i<N;i++)";
+								thuattoan.setSelectedIndex(0);
 				                start++;
 				            }
 				            else
@@ -2370,6 +2430,7 @@ public class Form1 extends JFrame {
 				                    if (yellow < 80)
 				                    {
 				                  //      richTextBox2.Text = "if(a[i]==x)";
+				                    	thuattoan.setSelectedIndex(1);
 				                        yellow++;
 				                    }
 				                    else
@@ -2397,6 +2458,7 @@ public class Form1 extends JFrame {
 				                            {
 				                                buttonnumsrch.setVisible(false);
 				                                buttonnumsrch.setBackground(color);
+				                                thuattoan.setSelectedIndex(2);
 				                             //   label13.Visible = true;
 				                             //   label13.Text = "Tìm thấy !!!";
 				                                JOptionPane.showMessageDialog(rootPane, "Tìm thấy", "", JOptionPane.INFORMATION_MESSAGE);
@@ -2413,6 +2475,7 @@ public class Form1 extends JFrame {
 				                {
 				                    buttonnumsrch.setVisible(false);
 				                    buttonnumsrch.setBackground(color);
+				                    thuattoan.setSelectedIndex(3);
 				                    JOptionPane.showMessageDialog(contentPane, "Không tìm thấy", "", JOptionPane.INFORMATION_MESSAGE);				                   
 				                    labeli.setVisible(false);
 				                    buttonStop.setVisible(false);
@@ -2589,11 +2652,11 @@ public class Form1 extends JFrame {
 		textareayTuong.setEditable(false);
 		textareayTuong.setForeground(Color.BLUE);
 		textareayTuong.setFont(new Font("Monospaced", Font.PLAIN, 15));
-		textareayTuong.setBounds(357, 310, 505, 56);
+		textareayTuong.setBounds(357, 310, 505, 68);
 		contentPane.add(textareayTuong);
 		
 		labelyTuong = new JLabel("Ý tưởng");
-		labelyTuong.setBounds(265, 329, 81, 18);
+		labelyTuong.setBounds(266, 333, 81, 18);
 		labelyTuong.setFont(new Font("Tahoma", Font.BOLD, 15));
 		contentPane.add(labelyTuong);
 		
