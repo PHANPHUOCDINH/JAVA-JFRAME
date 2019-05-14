@@ -164,6 +164,14 @@ public class Form1 extends JFrame {
 		
 		JMenuItem mntmHngDnS = new JMenuItem("Hướng dẫn sử dụng");
 		menuGioiThieu.add(mntmHngDnS);
+		mntmHngDnS.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(contentPane, "Chọn dãy số đầu vào > Chọn thuật toán > Chọn chiều sắp xếp(nếu có) > Tạo nút > Bắt Đầu\r\nCác tùy chọn khác: Dừng Lại,Tiếp Tục,Tạo Mới\r\n                                     Cài Đặt>Chọn Màu Nút", "Hướng dẫn sử dụng", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		
 		radioButtonNhap = new JRadioButton("Nhập");
 		radioButtonNhap.setBounds(33, 26, 63, 23);
