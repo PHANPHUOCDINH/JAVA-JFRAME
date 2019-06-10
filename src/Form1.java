@@ -2400,14 +2400,31 @@ public class Form1 extends JFrame {
 				                            orange++;
 				                        else
 				                        {
+				                        	labelArrowR.setLocation(xpos[list.get(indexstep).index1] -1, 435);
+			                                labelArrowL.setLocation(xpos[list.get(indexstep).Xleft] + 30, 435);
+			                                labelArrowL.setVisible(true);
+			                                labelArrowR.setVisible(true);
+			                                if(yellow<70)
+			                                {
+			                                	yellow++;
+			                                }
+			                                else
+			                                {
 				                            labelleft.setLocation(listbut[list.get(indexstep).index1].getLocation().x + 17, listbut[list.get(indexstep).index1].getLocation().y + 100);
 				                            labelmid.setLocation(listbut[list.get(indexstep).index2].getLocation().x + 15, listbut[list.get(indexstep).index2].getLocation().y + 130);
 				                            labelright.setLocation(listbut[list.get(indexstep).Xleft].getLocation().x + 13, listbut[list.get(indexstep).Xleft].getLocation().y + 160);
 				                            labelleft.setVisible(true);
-				                            labelmid.setVisible(true);
 				                            labelright.setVisible(true);
+				                            if(yellow<140)
+				                            {
+				                            	yellow++;
+				                            }
+				                            else
+				                            {
+				                            labelmid.setVisible(true);
+				                            
 				                            listbut[list.get(indexstep).index2].setBackground(Color.yellow);
-				                            if (yellow < 80)
+				                            if (yellow < 210)
 				                            {
 				                                buttonnumsrch.setBackground(Color.yellow);
 				                        //        richTextBox2.Text = "(a[mid]==x)?";
@@ -2435,6 +2452,7 @@ public class Form1 extends JFrame {
 				                                        orange=0;
 				                                   //     richTextBox2.Text = "";
 				                                        timer.stop();
+				                                        yellow=0;
 				                                    }
 				                                }
 				                                else
@@ -2463,6 +2481,8 @@ public class Form1 extends JFrame {
 				                                }
 				                            }
 				                        }
+			                                }
+				                    }
 				                    }
 				                    else
 				                    {
